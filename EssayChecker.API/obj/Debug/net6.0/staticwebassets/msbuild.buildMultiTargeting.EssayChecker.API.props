@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\EssayChecker.API.props" />
+</Project>

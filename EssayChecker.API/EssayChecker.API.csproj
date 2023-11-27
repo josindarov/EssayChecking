@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\Foundation\Essays\" />
+    <Folder Include="Services\Foundation\Feedback\" />
+    <Folder Include="Services\Foundation\User\" />
+  </ItemGroup>
+
+</Project>
