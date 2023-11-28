@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using EssayChecker.API.Brokers.Storages;
+using EssayChecker.API.Models.Foundation.Users;
 
 namespace EssayChecker.API.Services.Foundation.Users;
 
@@ -13,28 +14,28 @@ public class UserService : IUserService
     {
         this.storageBroker = storageBroker;
     }
-    public async ValueTask<Models.Foundation.Users.User> AddUserAsync(Models.Foundation.Users.User user)
+    public async ValueTask<User> AddUserAsync(User user)
     {
         throw new NotImplementedException();
     }
 
-    public async ValueTask<Models.Foundation.Users.User> RetrieveUserByIdAsync(Models.Foundation.Users.User user)
+    public async ValueTask<User> RetrieveUserByIdAsync(User user)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
     public IQueryable<Models.Foundation.Users.User> RetrieveAllUsers()
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
-    public async ValueTask<Models.Foundation.Users.User> ModifyUserAsync(Models.Foundation.Users.User user)
+    public async ValueTask<User> ModifyUserAsync(User user)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 
-    public async ValueTask<Models.Foundation.Users.User> RemoveUserAsync(Models.Foundation.Users.User user)
+    public async ValueTask<User> RemoveUserAsync(User user)
     {
-        throw new System.NotImplementedException();
+        throw new NotImplementedException();
     }
 }

@@ -5,7 +5,12 @@
       "ProjectGuid": "cc25d24e-5b00-4b8b-bd5b-16197a26dd99",
       "DisplayName": "EssayChecker.API",
       "ColorIndex": 0
+    },
+    "c9a10c4a-e97c-4f4a-9494-0dff20e1f29b": {
+      "ProjectGuid": "c9a10c4a-e97c-4f4a-9494-0dff20e1f29b",
+      "DisplayName": "EssayChecker.API.Unit.Test",
+      "ColorIndex": 1
     }
   },
-  "NextColorIndex": 1
+  "NextColorIndex": 2
 }

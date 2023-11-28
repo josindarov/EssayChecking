@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EssayChecker.API", "EssayChecker.API\EssayChecker.API.csproj", "{CC25D24E-5B00-4B8B-BD5B-16197A26DD99}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EssayChecker.API.Unit.Test", "EssayChecker.API.Unit.Test\EssayChecker.API.Unit.Test.csproj", "{C9A10C4A-E97C-4F4A-9494-0DFF20E1F29B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EssayChecker.API.Unit.Test", "EssayChecker.API.Unit.Test\EssayChecker.API.Unit.Test.csproj", "{94A8F14D-0A20-4FE5-B3BF-0A021902D05D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{CC25D24E-5B00-4B8B-BD5B-16197A26DD99}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC25D24E-5B00-4B8B-BD5B-16197A26DD99}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC25D24E-5B00-4B8B-BD5B-16197A26DD99}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C9A10C4A-E97C-4F4A-9494-0DFF20E1F29B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C9A10C4A-E97C-4F4A-9494-0DFF20E1F29B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C9A10C4A-E97C-4F4A-9494-0DFF20E1F29B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C9A10C4A-E97C-4F4A-9494-0DFF20E1F29B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94A8F14D-0A20-4FE5-B3BF-0A021902D05D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94A8F14D-0A20-4FE5-B3BF-0A021902D05D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94A8F14D-0A20-4FE5-B3BF-0A021902D05D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94A8F14D-0A20-4FE5-B3BF-0A021902D05D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
