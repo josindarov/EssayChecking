@@ -21,5 +21,10 @@ public partial class StorageBroker : EFxceptionsContext
 
         optionsBuilder.UseNpgsql(connectionString);
     }
-    
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        AddEssayConfigurations(modelBuilder);
+        AddFeedbackConfigurations(modelBuilder);
+    }
 }
