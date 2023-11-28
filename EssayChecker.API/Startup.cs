@@ -1,4 +1,5 @@
 using EssayChecker.API.Brokers.Storages;
+using EssayChecker.API.Services.Foundation.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
