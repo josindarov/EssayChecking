@@ -21,8 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Services\Foundation\Essays\" />
-    <Folder Include="Services\Foundation\Feedback\" />
-    <Folder Include="Services\Foundation\User\" />
+    <Folder Include="Services\Foundation\Feedbacks\" />
   </ItemGroup>
 
 </Project>
