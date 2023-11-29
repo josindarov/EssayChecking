@@ -23,6 +23,7 @@ namespace EssayChecker.API
         public void ConfigureServices(IServiceCollection services)
         {
             AddBrokers(services);
+            AddServices(services);
             services.AddDbContext<StorageBroker>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -58,6 +59,11 @@ namespace EssayChecker.API
         private static void AddBrokers(IServiceCollection services)
         {
             services.AddTransient<IStorageBroker, StorageBroker>();
+        }
+
+        private static void AddServices(IServiceCollection services)
+        {
+            services.AddTransient<IUserService, UserService>();
         }
     }
 }
