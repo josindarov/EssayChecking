@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\99899\\Desktop\\personal project\\EssayChecking\\EssayChecker.API\\EssayChecker.API.csproj": {}
+    "C:\\Users\\99899\\Desktop\\personal project\\EssayChecking\\EssayChecker.API.Unit.Test\\EssayChecker.API.Unit.Test.csproj": {}
   },
   "projects": {
-    "C:\\Users\\99899\\Desktop\\personal project\\EssayChecking\\EssayChecker.API\\EssayChecker.API.csproj": {
+    "C:\\Users\\99899\\Desktop\\personal project\\EssayChecking\\EssayChecker.API.Unit.Test\\EssayChecker.API.Unit.Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\99899\\Desktop\\personal project\\EssayChecking\\EssayChecker.API\\EssayChecker.API.csproj",
-        "projectName": "EssayChecker.API",
-        "projectPath": "C:\\Users\\99899\\Desktop\\personal project\\EssayChecking\\EssayChecker.API\\EssayChecker.API.csproj",
+        "projectUniqueName": "C:\\Users\\99899\\Desktop\\personal project\\EssayChecking\\EssayChecker.API.Unit.Test\\EssayChecker.API.Unit.Test.csproj",
+        "projectName": "EssayChecker.API.Unit.Test",
+        "projectPath": "C:\\Users\\99899\\Desktop\\personal project\\EssayChecking\\EssayChecker.API.Unit.Test\\EssayChecker.API.Unit.Test.csproj",
         "packagesPath": "C:\\Users\\99899\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\99899\\Desktop\\personal project\\EssayChecking\\EssayChecker.API\\obj\\",
+        "outputPath": "C:\\Users\\99899\\Desktop\\personal project\\EssayChecking\\EssayChecker.API.Unit.Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\99899\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,33 +40,25 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "EFxceptions": {
+            "Microsoft.NET.Test.Sdk": {
               "target": "Package",
-              "version": "[0.4.5, )"
+              "version": "[16.9.4, )"
             },
-            "Microsoft.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[7.0.14, )"
-            },
-            "Microsoft.EntityFrameworkCore.Design": {
+            "coverlet.collector": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.14, )"
+              "version": "[3.0.2, )"
             },
-            "Microsoft.EntityFrameworkCore.Tools": {
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.14, )"
-            },
-            "Npgsql.EntityFrameworkCore.PostgreSQL": {
-              "target": "Package",
-              "version": "[7.0.11, )"
-            },
-            "Swashbuckle.AspNetCore": {
-              "target": "Package",
-              "version": "[5.6.3, )"
+              "version": "[2.4.3, )"
             }
           },
           "imports": [
@@ -80,9 +72,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

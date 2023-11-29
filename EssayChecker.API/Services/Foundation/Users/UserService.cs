@@ -15,7 +15,7 @@ public class UserService : IUserService
     }
     public async ValueTask<Models.Foundation.Users.User> AddUserAsync(Models.Foundation.Users.User user)
     {
-        throw new NotImplementedException();
+        return await storageBroker.InsertUserAsync(user);
     }
 
     public async ValueTask<Models.Foundation.Users.User> RetrieveUserByIdAsync(Models.Foundation.Users.User user)
