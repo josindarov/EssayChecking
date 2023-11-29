@@ -92,7 +92,6 @@ C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\bin\Debug
 C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\bin\Debug\net6.0\EssayChecker.API.deps.json
 C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\bin\Debug\net6.0\EssayChecker.API.runtimeconfig.json
 C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\bin\Debug\net6.0\EssayChecker.API.dll
-C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\bin\Debug\net6.0\ref\EssayChecker.API.dll
 C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\bin\Debug\net6.0\EssayChecker.API.pdb
 C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\bin\Debug\net6.0\EFxceptions.dll
 C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\bin\Debug\net6.0\Humanizer.dll
@@ -168,3 +167,13 @@ C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\obj\Debug
 C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\obj\Debug\net6.0\ref\EssayChecker.API.dll
 C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\obj\Debug\net6.0\EssayChecker.API.pdb
 C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\obj\Debug\net6.0\EssayChecker.API.genruntimeconfig.cache
+C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\obj\Debug\net6.0\EssayChecker.API.sourcelink.json
+C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\obj\Debug\net6.0\staticwebassets\msbuild.EssayChecker.API.Microsoft.AspNetCore.StaticWebAssets.props
+C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\obj\Debug\net6.0\staticwebassets\msbuild.build.EssayChecker.API.props
+C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.EssayChecker.API.props
+C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\obj\Debug\net6.0\staticwebassets\msbuild.buildTransitive.EssayChecker.API.props
+C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\obj\Debug\net6.0\staticwebassets.pack.json
+C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\obj\Debug\net6.0\refint\EssayChecker.API.dll
+C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\bin\Debug\net6.0\DeepCloner.dll
+C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\bin\Debug\net6.0\FluentAssertions.dll
+C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API\bin\Debug\net6.0\Xeption.dll

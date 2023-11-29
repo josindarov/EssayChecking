@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "w+IkW5K3l9fBrKB8LOAfvr5kUnCUf4UqOUnoCxP7tnWtfVci7okuPey43Tkyv0zVC0SB55648VnuGjWcHSKgrw==",
+  "dgSpecHash": "5DPUFLiI8fDyzbvjWY6PyDyIeYe+JFtt7OXhqFWAVRYeqsJ3SkSkA4I4AQDQgy3uBPLVYtF0B4SK7A4KyI9b7w==",
   "success": true,
   "projectFilePath": "C:\\Users\\99899\\Desktop\\personal project\\EssayChecking\\EssayChecker.API.Unit.Test\\EssayChecker.API.Unit.Test.csproj",
   "expectedPackageFiles": [
@@ -150,6 +150,7 @@
     "C:\\Users\\99899\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
     "C:\\Users\\99899\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
     "C:\\Users\\99899\\.nuget\\packages\\tynamix.objectfiller\\1.5.8\\tynamix.objectfiller.1.5.8.nupkg.sha512",
+    "C:\\Users\\99899\\.nuget\\packages\\xeption\\2.6.0\\xeption.2.6.0.nupkg.sha512",
     "C:\\Users\\99899\\.nuget\\packages\\xunit\\2.4.1\\xunit.2.4.1.nupkg.sha512",
     "C:\\Users\\99899\\.nuget\\packages\\xunit.abstractions\\2.0.3\\xunit.abstractions.2.0.3.nupkg.sha512",
     "C:\\Users\\99899\\.nuget\\packages\\xunit.analyzers\\0.10.0\\xunit.analyzers.0.10.0.nupkg.sha512",

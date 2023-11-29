@@ -161,3 +161,4 @@ C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API.Unit.Test
 C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API.Unit.Test\obj\Debug\net6.0\EssayChecker.API.Unit.Test.pdb
 C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API.Unit.Test\obj\Debug\net6.0\EssayChecker.API.Unit.Test.genruntimeconfig.cache
 C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API.Unit.Test\obj\Debug\net6.0\ref\EssayChecker.API.Unit.Test.dll
+C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API.Unit.Test\bin\Debug\net6.0\Xeption.dll
