@@ -31,4 +31,42 @@ public partial class UserServiceTests
         
         storageBrokerMock.VerifyNoOtherCalls();
     }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("     ")]
+    public async Task ShouldThrowValidationExceptionOnAddIfUserIsInvalidAndLogItAsync(
+        string invalidText)
+    {
+        // given
+        var invalidUser = new User()
+        {
+            Name = invalidText
+        };
+
+        var invalidUserException = new InvalidUserException();
+        
+        invalidUserException.AddData(
+            key:nameof(User.Id),
+            values:"Id is required");
+        
+        invalidUserException.AddData(
+            key:nameof(User.Name),
+            values:"Text is required");
+
+        var expectedValidationException = 
+            new UserValidationException(invalidUserException);
+        
+        // when
+        ValueTask<User> addUserTask =
+            this.userService.AddUserAsync(invalidUser);
+
+        UserValidationException actualUserValidationException =
+            await Assert.ThrowsAsync<UserValidationException>(addUserTask.AsTask);
+        
+        // then
+        actualUserValidationException.Should().BeEquivalentTo(expectedValidationException);
+    }
+    
 }
