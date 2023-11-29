@@ -2889,6 +2889,20 @@
           }
         }
       },
+      "Xeption/2.6.0": {
+        "type": "package",
+        "dependencies": {
+          "DeepCloner": "0.10.4",
+          "FluentAssertions": "6.5.1",
+          "System.Linq": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.1/Xeption.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Xeption.dll": {}
+        }
+      },
       "xunit/2.4.1": {
         "type": "package",
         "dependencies": {
@@ -2991,7 +3005,8 @@
           "EFxceptions": "0.4.5",
           "Microsoft.EntityFrameworkCore": "7.0.14",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.11",
-          "Swashbuckle.AspNetCore": "5.6.3"
+          "Swashbuckle.AspNetCore": "5.6.3",
+          "Xeption": "2.6.0"
         },
         "compile": {
           "bin/placeholder/EssayChecker.API.dll": {}
@@ -9025,6 +9040,21 @@
         "tynamix.objectfiller.nuspec"
       ]
     },
+    "Xeption/2.6.0": {
+      "sha512": "CUdKdzYSdtLl+Q2L3ytIEi1ustEjJjyDCFdw4/3y6wXycr8MnO3FpLJZsPLxtCCW9m4ahUTRyUSaVT1wHJT+5w==",
+      "type": "package",
+      "path": "xeption/2.6.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "License.txt",
+        "Xeption.png",
+        "lib/netstandard2.0/Xeption.dll",
+        "lib/netstandard2.1/Xeption.dll",
+        "xeption.2.6.0.nupkg.sha512",
+        "xeption.nuspec"
+      ]
+    },
     "xunit/2.4.1": {
       "sha512": "XNR3Yz9QTtec16O0aKcO6+baVNpXmOnPUxDkCY97J+8krUYxPvXT1szYYEUdKk4sB8GOI2YbAjRIOm8ZnXRfzQ==",
       "type": "package",
@@ -9174,6 +9204,7 @@
       "Microsoft.NET.Test.Sdk >= 16.9.4",
       "Moq >= 4.20.70",
       "Tynamix.ObjectFiller >= 1.5.8",
+      "Xeption >= 2.6.0",
       "coverlet.collector >= 3.0.2",
       "xunit >= 2.4.1",
       "xunit.runner.visualstudio >= 2.4.3"
@@ -9241,6 +9272,10 @@
           "Tynamix.ObjectFiller": {
             "target": "Package",
             "version": "[1.5.8, )"
+          },
+          "Xeption": {
+            "target": "Package",
+            "version": "[2.6.0, )"
           },
           "coverlet.collector": {
             "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
