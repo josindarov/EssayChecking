@@ -2,11 +2,13 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using EssayChecker.API.Brokers.Storages;
+using EssayChecker.API.Models.Foundation.Users;
 using EssayChecker.API.Models.Foundation.Users.Exceptions;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace EssayChecker.API.Services.Foundation.Users;
 
-public class UserService : IUserService
+public partial class UserService : IUserService
 {
     private readonly IStorageBroker storageBroker;
 
@@ -14,24 +16,14 @@ public class UserService : IUserService
     {
         this.storageBroker = storageBroker;
     }
-    public async ValueTask<Models.Foundation.Users.User> AddUserAsync(Models.Foundation.Users.User user)
-    {
-        try
+
+    public ValueTask<User> AddUserAsync(User user) =>
+        TryCatch(async () =>
         {
-            if (user is null)
-            {
-                throw new UserNullException();
-            }
+            ValidateUserNotNull(user);
             return await storageBroker.InsertUserAsync(user);
-        }
-        catch (UserNullException userNullException)
-        {
-            var userValidationException = 
-                new UserValidationException(userNullException);
-            
-            throw userValidationException;
-        }
-    }
+        });
+    
 
     public async ValueTask<Models.Foundation.Users.User> RetrieveUserByIdAsync(Models.Foundation.Users.User user)
     {
