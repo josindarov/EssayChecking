@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using EssayChecker.API.Brokers.Storages;
+using EssayChecker.API.Models.Foundation.Users.Exceptions;
 
 namespace EssayChecker.API.Services.Foundation.Users;
 
@@ -15,7 +16,21 @@ public class UserService : IUserService
     }
     public async ValueTask<Models.Foundation.Users.User> AddUserAsync(Models.Foundation.Users.User user)
     {
-        return await storageBroker.InsertUserAsync(user);
+        try
+        {
+            if (user is null)
+            {
+                throw new UserNullException();
+            }
+            return await storageBroker.InsertUserAsync(user);
+        }
+        catch (UserNullException userNullException)
+        {
+            var userValidationException = 
+                new UserValidationException(userNullException);
+            
+            throw userValidationException;
+        }
     }
 
     public async ValueTask<Models.Foundation.Users.User> RetrieveUserByIdAsync(Models.Foundation.Users.User user)
