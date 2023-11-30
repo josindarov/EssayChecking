@@ -32,7 +32,7 @@ namespace EssayChecker.API.Unit.Test.Services.Foundation.Users
                 broker.InsertUserAsync(inputUser), Times.Once);
             
             this.storageBrokerMock.VerifyNoOtherCalls();
-
+            this.loggingBrokerMock.VerifyNoOtherCalls();
         }
     }
 }

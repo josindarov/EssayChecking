@@ -4,6 +4,7 @@ using EssayChecker.API.Models.Foundation.Users.Exceptions;
 using FluentAssertions;
 using Moq;
 using Xunit;
+using Xunit.Sdk;
 
 namespace EssayChecker.API.Unit.Test.Services.Foundation.Users;
 
@@ -29,8 +30,13 @@ public partial class UserServiceTests
         // then
         actualUserValidationException.Should().BeEquivalentTo(
             expectedUserValidationException);
+
+        this.loggingBrokerMock.Verify(broker =>
+            broker.LogError(It.Is(SameExceptionAs(
+                expectedUserValidationException))),Times.Once);
         
         storageBrokerMock.VerifyNoOtherCalls();
+        loggingBrokerMock.VerifyNoOtherCalls();
     }
 
     [Theory]
@@ -61,7 +67,7 @@ public partial class UserServiceTests
             key: nameof(User.TelephoneNumber),
             values: "Text is required");
 
-        var expectedValidationException = 
+        var expectedUserValidationException = 
             new UserValidationException(invalidUserException);
         
         // when
@@ -72,12 +78,17 @@ public partial class UserServiceTests
             await Assert.ThrowsAsync<UserValidationException>(addUserTask.AsTask);
         
         // then
-        actualUserValidationException.Should().BeEquivalentTo(expectedValidationException);
+        actualUserValidationException.Should().BeEquivalentTo(expectedUserValidationException);
+        
+        this.loggingBrokerMock.Verify(broker =>
+            broker.LogError(It.Is(SameExceptionAs(
+                expectedUserValidationException))),Times.Once);
         
         this.storageBrokerMock.Verify(broker =>
                 broker.InsertUserAsync(invalidUser), Times.Never);
         
         storageBrokerMock.VerifyNoOtherCalls();
+        loggingBrokerMock.VerifyNoOtherCalls();
     }
     
 }
