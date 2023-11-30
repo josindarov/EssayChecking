@@ -31,6 +31,7 @@ public partial class UserService
         var userValidationException = 
             new UserValidationException(exception);
 
+        this.loggingBroker.LogError(userValidationException);
         return userValidationException;
     }
 }
