@@ -1,3 +1,4 @@
+using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.Storages;
 using EssayChecker.API.Services.Foundation.Users;
 using Microsoft.AspNetCore.Builder;
@@ -59,6 +60,7 @@ namespace EssayChecker.API
         private static void AddBrokers(IServiceCollection services)
         {
             services.AddTransient<IStorageBroker, StorageBroker>();
+            services.AddTransient<ILoggingBroker, LoggingBroker>();
         }
 
         private static void AddServices(IServiceCollection services)
