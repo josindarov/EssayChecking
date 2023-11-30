@@ -20,7 +20,7 @@ public partial class UserService : IUserService
     public ValueTask<User> AddUserAsync(User user) =>
         TryCatch(async () =>
         {
-            ValidateUserNotNull(user);
+            ValidateUserOnAdd(user);
             return await storageBroker.InsertUserAsync(user);
         });
     

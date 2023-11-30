@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using EssayChecker.API.Models.Foundation.Users;
 using EssayChecker.API.Models.Foundation.Users.Exceptions;
 using FluentAssertions;
+using Moq;
 using Xunit;
 
 namespace EssayChecker.API.Unit.Test.Services.Foundation.Users;
@@ -35,14 +36,15 @@ public partial class UserServiceTests
     [Theory]
     [InlineData(null)]
     [InlineData("")]
-    [InlineData("     ")]
+    [InlineData("   ")]
     public async Task ShouldThrowValidationExceptionOnAddIfUserIsInvalidAndLogItAsync(
         string invalidText)
     {
         // given
         var invalidUser = new User()
         {
-            Name = invalidText
+            Name = invalidText,
+            TelephoneNumber = invalidText
         };
 
         var invalidUserException = new InvalidUserException();
@@ -54,6 +56,10 @@ public partial class UserServiceTests
         invalidUserException.AddData(
             key:nameof(User.Name),
             values:"Text is required");
+
+        invalidUserException.AddData(
+            key: nameof(User.TelephoneNumber),
+            values: "Text is required");
 
         var expectedValidationException = 
             new UserValidationException(invalidUserException);
@@ -67,6 +73,11 @@ public partial class UserServiceTests
         
         // then
         actualUserValidationException.Should().BeEquivalentTo(expectedValidationException);
+        
+        this.storageBrokerMock.Verify(broker =>
+                broker.InsertUserAsync(invalidUser), Times.Never);
+        
+        storageBrokerMock.VerifyNoOtherCalls();
     }
     
 }
