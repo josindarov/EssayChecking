@@ -39,9 +39,10 @@ public partial class UserServiceTests
         storageBrokerMock.Verify(broker => 
             broker.InsertUserAsync(randomUser),Times.Once);
         
-        loggingBrokerMock.Verify(broker =>
+        this.loggingBrokerMock.Verify(broker =>
             broker.LogCritical(It.Is(SameExceptionAs(
-                expectedUserDependencyException))), Times.Once());
+                expectedUserDependencyException))), 
+            Times.Once);
         
         loggingBrokerMock.VerifyNoOtherCalls();
         storageBrokerMock.VerifyNoOtherCalls();
