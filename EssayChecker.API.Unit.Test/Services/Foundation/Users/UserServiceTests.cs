@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
+using System.Reflection;
+using System.Runtime.Serialization;
 using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.Storages;
 using EssayChecker.API.Models.Foundation.Users;
 using EssayChecker.API.Services.Foundation.Users;
+using Microsoft.Data.SqlClient;
 using Moq;
 using Tynamix.ObjectFiller;
 using Xeptions;
@@ -29,6 +32,11 @@ namespace EssayChecker.API.Unit.Test.Services.Foundation.Users
         
         private static Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedException) =>
 			actualException => actualException.SameExceptionAs(expectedException);
+
+        private static SqlException GetSqlException() =>
+            (SqlException)FormatterServices.GetUninitializedObject(typeof(SqlException));
+             
+        
 
         private static User CreateRandomUser() =>
             CreateUserFiller().Create();
