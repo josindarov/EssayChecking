@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using EssayChecker.API.Models.Foundation.Users;
 using EssayChecker.API.Models.Foundation.Users.Exceptions;
+using Microsoft.Data.SqlClient;
 using Xeptions;
 
 namespace EssayChecker.API.Services.Foundation.Users;
@@ -24,6 +25,11 @@ public partial class UserService
         {
             throw CreateAndLogValidationException(invalidUserException);
         }
+        catch(SqlException sqlException)
+        {
+            var userStorageException = new FailedUserStorageException(sqlException);
+            throw CreateAndLogCriticalDependencyException(userStorageException);
+        }
     }
 
     private UserValidationException CreateAndLogValidationException(Xeption exception)
@@ -33,5 +39,14 @@ public partial class UserService
 
         this.loggingBroker.LogError(userValidationException);
         return userValidationException;
+    }
+
+    private UserDependencyException CreateAndLogCriticalDependencyException(Xeption exception)
+    {
+        var userDependencyException = 
+            new UserDependencyException(exception);
+        
+        this.loggingBroker.LogCritical(userDependencyException);
+        return userDependencyException;
     }
 }
