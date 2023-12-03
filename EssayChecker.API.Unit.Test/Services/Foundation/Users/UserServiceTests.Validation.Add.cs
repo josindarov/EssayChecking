@@ -4,7 +4,6 @@ using EssayChecker.API.Models.Foundation.Users.Exceptions;
 using FluentAssertions;
 using Moq;
 using Xunit;
-using Xunit.Sdk;
 
 namespace EssayChecker.API.Unit.Test.Services.Foundation.Users;
 
