@@ -1,7 +1,9 @@
 using System.Threading.Tasks;
+using EFxceptions.Models.Exceptions;
 using EssayChecker.API.Models.Foundation.Users;
 using EssayChecker.API.Models.Foundation.Users.Exceptions;
 using FluentAssertions;
+using FluentAssertions.Equivalency.Tracing;
 using Microsoft.Data.SqlClient;
 using Moq;
 using Xunit;
@@ -48,4 +50,36 @@ public partial class UserServiceTests
         storageBrokerMock.VerifyNoOtherCalls();
         
     }
+
+    [Fact]
+    public async Task ShouldThrowDependencyValidationExceptionOnAddIfDuplicateKeyErrorOccuredAndLogItAsync()
+    {
+        // given 
+        User randomUser = CreateRandomUser();
+        string someMessage = GetRandomString();
+        var duplicateKeyException = new DuplicateKeyException(someMessage);
+
+        var alreadyExistsUserException = 
+            new AlreadyExistsUserException(duplicateKeyException);
+
+        var expectedUserDependencyValidationException =
+            new UserDependencyValidationException(alreadyExistsUserException);
+
+        // when
+        ValueTask<User> addUserTask = this.userService.AddUserAsync(randomUser);
+        
+        UserDependencyValidationException actualUserDependencyValidationException =
+            await Assert.ThrowsAsync<UserDependencyValidationException>(addUserTask.AsTask);
+        
+        // then
+        actualUserDependencyValidationException.Should().BeEquivalentTo(expectedUserDependencyValidationException);
+        
+        loggingBrokerMock.Verify(broker => 
+            broker.LogError(It.Is(SameExceptionAs(
+                expectedUserDependencyValidationException))),Times.Once);
+        
+        loggingBrokerMock.VerifyNoOtherCalls();
+        storageBrokerMock.VerifyNoOtherCalls();
+        
+    }   
 }
