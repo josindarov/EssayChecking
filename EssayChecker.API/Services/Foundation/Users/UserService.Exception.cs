@@ -35,6 +35,7 @@ public partial class UserService
         {
             var alreadyExistsUserException =
                 new AlreadyExistsUserException(duplicateKeyException);
+
             throw CreateAndLogDependencyValidationException(alreadyExistsUserException);
         }
         catch (Exception exception)
@@ -63,7 +64,6 @@ public partial class UserService
         loggingBroker.LogError(userDependencyValidationException);
         return userDependencyValidationException;
     }
-
     private UserValidationException CreateAndLogValidationException(Xeption exception)
     {
         var userValidationException = 
@@ -80,5 +80,13 @@ public partial class UserService
         
         this.loggingBroker.LogCritical(userDependencyException);
         return userDependencyException;
+    }
+    
+    private UserServiceException CreateAndLogServiceException(Xeption exception)
+    {
+        var userServiceException = new UserServiceException(exception);
+        
+        this.loggingBroker.LogError(userServiceException);
+        return userServiceException;
     }
 }

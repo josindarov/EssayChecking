@@ -28,4 +28,10 @@
     <ProjectReference Include="..\EssayChecker.API\EssayChecker.API.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="EssayChecker.API">
+      <HintPath>..\EssayChecker.API\bin\Debug\net6.0\EssayChecker.API.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
