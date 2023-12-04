@@ -4,5 +4,10 @@
     &lt;ProjectFile&gt;075528DE-7DE4-4301-97C9-0130862066BF/d:Services/d:Foundation/d:Users/f:UserServiceTests.Logic.Add.cs&lt;/ProjectFile&gt;&#xD;
     &lt;ProjectFile&gt;075528DE-7DE4-4301-97C9-0130862066BF/d:Services/d:Foundation/d:Users/f:UserServiceTests.Validation.Add.cs&lt;/ProjectFile&gt;&#xD;
     &lt;ProjectFile&gt;075528DE-7DE4-4301-97C9-0130862066BF/d:Services/d:Foundation/d:Users/f:UserServiceTests.Exception.Add.cs&lt;/ProjectFile&gt;&#xD;
+    &lt;ProjectFile&gt;075528DE-7DE4-4301-97C9-0130862066BF/d:Services/d:Foundation/d:Users/f:UserServiceTests.Logic.Modify.cs&lt;/ProjectFile&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Users.UserServiceTests.ShouldThrowValidationExceptionOnUpdateIfUserIsNullAndLogItAsync&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Users.UserServiceTests.ShouldThrowValidationExceptionOnUpdateIfUserIsInvalidAndLogItAsync&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
   &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

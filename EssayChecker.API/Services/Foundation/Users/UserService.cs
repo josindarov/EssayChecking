@@ -31,22 +31,39 @@ public partial class UserService : IUserService
         });
     
 
-    public async ValueTask<Models.Foundation.Users.User> RetrieveUserByIdAsync(Models.Foundation.Users.User user)
+    public async ValueTask<User> RetrieveUserByIdAsync(Guid id)
+    {
+        return await this.storageBroker.SelectUserByIdAsync(id);
+    }
+
+    public IQueryable<User> RetrieveAllUsers()
     {
         throw new System.NotImplementedException();
     }
 
-    public IQueryable<Models.Foundation.Users.User> RetrieveAllUsers()
+    public async ValueTask<User> ModifyUserAsync(User user)
     {
-        throw new System.NotImplementedException();
+        try
+        {
+            if (user is null)
+            {
+                throw new UserNullException();
+            }
+            User updatedUser = await RetrieveUserByIdAsync(user.Id);
+            return await this.storageBroker.UpdateUserAsync(updatedUser);
+        }
+        catch (UserNullException userNullException)
+        {
+            var userValidationException = 
+                new UserValidationException(userNullException);
+
+            this.loggingBroker.LogError(userValidationException);
+            throw userValidationException;
+        }
+        
     }
 
-    public async ValueTask<Models.Foundation.Users.User> ModifyUserAsync(Models.Foundation.Users.User user)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public async ValueTask<Models.Foundation.Users.User> RemoveUserAsync(Models.Foundation.Users.User user)
+    public async ValueTask<User> RemoveUserAsync(Guid id)
     {
         throw new System.NotImplementedException();
     }

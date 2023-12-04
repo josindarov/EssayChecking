@@ -64,11 +64,14 @@ public partial class UserServiceTests
 
         var expectedUserDependencyValidationException =
             new UserDependencyValidationException(alreadyExistsUserException);
-
-        /*this.dateTimeBrokerMock.Setup(broker =>
-            broker.GetCurrentDateTimeOffset()).Throws(duplicateKeyException);*/
+        
+        this.storageBrokerMock.Setup(broker =>
+            broker.InsertUserAsync(randomUser))
+            .Throws(duplicateKeyException);
+        
         this.storageBrokerMock.Setup(broker => broker.InsertUserAsync(randomUser))
             .Throws(duplicateKeyException);
+
         // when
         ValueTask<User> addUserTask = this.userService.AddUserAsync(randomUser);
         
@@ -84,11 +87,14 @@ public partial class UserServiceTests
             broker.LogError(It.Is(SameExceptionAs(
                 expectedUserDependencyValidationException))),Times.Once);
         
-        storageBrokerMock.Verify(broker => broker.InsertUserAsync(randomUser),Times.Once);
+        storageBrokerMock.Verify(broker => 
+            broker.InsertUserAsync(randomUser),
+            Times.Once);
+        
         loggingBrokerMock.VerifyNoOtherCalls();
         storageBrokerMock.VerifyNoOtherCalls();
-        
-    }
+    }   
+    
 
     [Fact]
     public async Task ShouldThrowServiceExceptionOnAddIfServiceErrorOccuredAndLogIdAsync()
@@ -98,13 +104,12 @@ public partial class UserServiceTests
         var serviceException = new Exception();
         var failedUserServiceException = new FailedUserServiceException(serviceException);
 
-        var expectedUserServiceException =
-            new UserServiceException(failedUserServiceException);
+        var expectedUserServiceException = new UserServiceException(failedUserServiceException);
 
-        this.storageBrokerMock.Setup(broker =>
-            broker.InsertUserAsync(randomUser)).Throws(serviceException);
-        
-        // when 
+        storageBrokerMock.Setup(broker =>
+                broker.InsertUserAsync(randomUser))
+            .ThrowsAsync(serviceException);
+        // when
         ValueTask<User> addUserTask = this.userService.AddUserAsync(randomUser);
 
         UserServiceException actualUserServiceException =
@@ -112,15 +117,17 @@ public partial class UserServiceTests
 
         // then
         actualUserServiceException.Should().BeEquivalentTo(expectedUserServiceException);
-        
-        this.loggingBrokerMock.Verify(broker => 
+
+        loggingBrokerMock.Verify(broker =>
             broker.LogError(It.Is(SameExceptionAs(
-                expectedUserServiceException))),Times.Once);
-        
-        this.storageBrokerMock.Verify(broker => 
+                expectedUserServiceException))), Times.Once);
+
+        storageBrokerMock.Verify(broker =>
             broker.InsertUserAsync(randomUser), Times.Once);
-        
-        this.loggingBrokerMock.VerifyNoOtherCalls();
-        this.storageBrokerMock.VerifyNoOtherCalls();
+
+        loggingBrokerMock.VerifyNoOtherCalls();
+        storageBrokerMock.VerifyNoOtherCalls();
     }
+
+    
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using EssayChecker.API.Models.Foundation.Users;
@@ -12,9 +13,8 @@ public partial class StorageBroker
     public async ValueTask<User> InsertUserAsync(User user) =>
         await InsertAsync(user);
 
-    public async ValueTask<User> SelectUserByIdAsync(User user) =>
-        await SelectAsync<User>();
-
+    public async ValueTask<User> SelectUserByIdAsync(Guid id) =>
+        await SelectAsync<User>(id);
     public IQueryable<User> SelectAllUsers() =>
         SelectAll<User>();
 

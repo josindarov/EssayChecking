@@ -40,12 +40,30 @@ public partial class UserService
         }
         catch (Exception exception)
         {
-            var failedUserServiceException = new FailedUserServiceException(exception);
-            throw CreateAndLogServiceException(failedUserServiceException);
+            var failedUserServiceException =
+                new FailedUserServiceException(exception);
+
+            throw CreateAndLogUserValidationException(failedUserServiceException);
         }
     }
 
-    
+    private Exception CreateAndLogUserValidationException(Exception exception)
+    {
+        UserServiceException userServiceException = 
+            new UserServiceException(exception);
+
+        loggingBroker.LogError(userServiceException);
+        return userServiceException;
+    }
+
+    private UserDependencyValidationException CreateAndLogDependencyValidationException(Xeption exception)
+    {
+        UserDependencyValidationException userDependencyValidationException =
+            new UserDependencyValidationException(exception);
+
+        loggingBroker.LogError(userDependencyValidationException);
+        return userDependencyValidationException;
+    }
     private UserValidationException CreateAndLogValidationException(Xeption exception)
     {
         var userValidationException = 
@@ -64,15 +82,6 @@ public partial class UserService
         return userDependencyException;
     }
     
-    private Exception CreateAndLogDependencyValidationException(Xeption exception)
-    {
-        var userDependencyValidationException =
-            new UserDependencyValidationException(exception);
-        
-        this.loggingBroker.LogError(userDependencyValidationException);
-        return userDependencyValidationException;   
-    }
-
     private UserServiceException CreateAndLogServiceException(Xeption exception)
     {
         var userServiceException = new UserServiceException(exception);
