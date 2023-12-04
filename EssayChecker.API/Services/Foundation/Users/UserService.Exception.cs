@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using EFxceptions.Models.Exceptions;
 using EssayChecker.API.Models.Foundation.Users;
 using EssayChecker.API.Models.Foundation.Users.Exceptions;
 using Microsoft.Data.SqlClient;
@@ -25,13 +26,26 @@ public partial class UserService
         {
             throw CreateAndLogValidationException(invalidUserException);
         }
-        catch(SqlException sqlException)
+        catch (SqlException sqlException)
         {
             var userStorageException = new FailedUserStorageException(sqlException);
             throw CreateAndLogCriticalDependencyException(userStorageException);
         }
+        catch (DuplicateKeyException duplicateKeyException)
+        {
+            var alreadyExistsUserException =
+                new AlreadyExistsUserException(duplicateKeyException);
+
+            throw CreateAndLogDependencyValidationException(alreadyExistsUserException);
+        }
+        catch (Exception exception)
+        {
+            var failedUserServiceException = new FailedUserServiceException(exception);
+            throw CreateAndLogServiceException(failedUserServiceException);
+        }
     }
 
+    
     private UserValidationException CreateAndLogValidationException(Xeption exception)
     {
         var userValidationException = 
@@ -48,5 +62,22 @@ public partial class UserService
         
         this.loggingBroker.LogCritical(userDependencyException);
         return userDependencyException;
+    }
+    
+    private Exception CreateAndLogDependencyValidationException(Xeption exception)
+    {
+        var userDependencyValidationException =
+            new UserDependencyValidationException(exception);
+        
+        this.loggingBroker.LogError(userDependencyValidationException);
+        return userDependencyValidationException;   
+    }
+
+    private UserServiceException CreateAndLogServiceException(Xeption exception)
+    {
+        var userServiceException = new UserServiceException(exception);
+        
+        this.loggingBroker.LogError(userServiceException);
+        return userServiceException;
     }
 }
