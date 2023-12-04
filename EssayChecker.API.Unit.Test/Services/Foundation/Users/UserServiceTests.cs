@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Reflection;
 using System.Runtime.Serialization;
 using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.Storages;
@@ -11,7 +10,6 @@ using Moq;
 using Tynamix.ObjectFiller;
 using Xeptions;
 using Xunit;
-using Xunit.Sdk;
 
 namespace EssayChecker.API.Unit.Test.Services.Foundation.Users
 {

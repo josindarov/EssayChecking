@@ -3,7 +3,6 @@ using EFxceptions.Models.Exceptions;
 using EssayChecker.API.Models.Foundation.Users;
 using EssayChecker.API.Models.Foundation.Users.Exceptions;
 using FluentAssertions;
-using FluentAssertions.Equivalency.Tracing;
 using Microsoft.Data.SqlClient;
 using Moq;
 using Xunit;
