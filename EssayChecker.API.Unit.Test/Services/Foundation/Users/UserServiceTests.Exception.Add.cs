@@ -100,9 +100,9 @@ public partial class UserServiceTests
 
         var expectedUserServiceException =
             new UserServiceException(failedUserServiceException);
-        
-        this.dateTimeBrokerMock.Setup(broker =>
-            broker.GetCurrentDateTimeOffset()).Throws(serviceException);
+
+        this.storageBrokerMock.Setup(broker =>
+            broker.InsertUserAsync(randomUser)).Throws(serviceException);
         
         // when 
         ValueTask<User> addUserTask = this.userService.AddUserAsync(randomUser);
@@ -113,14 +113,13 @@ public partial class UserServiceTests
         // then
         actualUserServiceException.Should().BeEquivalentTo(expectedUserServiceException);
         
-        this.dateTimeBrokerMock.Verify(broker => 
-            broker.GetCurrentDateTimeOffset(), Times.Once);
-        
         this.loggingBrokerMock.Verify(broker => 
             broker.LogError(It.Is(SameExceptionAs(
                 expectedUserServiceException))),Times.Once);
         
-        this.dateTimeBrokerMock.VerifyNoOtherCalls();
+        this.storageBrokerMock.Verify(broker => 
+            broker.InsertUserAsync(randomUser), Times.Once);
+        
         this.loggingBrokerMock.VerifyNoOtherCalls();
         this.storageBrokerMock.VerifyNoOtherCalls();
     }
