@@ -40,8 +40,24 @@ public partial class UserService : IUserService
 
     public async ValueTask<User> ModifyUserAsync(User user)
     {
-        User updatedUser = await RetrieveUserByIdAsync(user.Id);
-        return await this.storageBroker.UpdateUserAsync(updatedUser);
+        try
+        {
+            if (user is null)
+            {
+                throw new UserNullException();
+            }
+            User updatedUser = await RetrieveUserByIdAsync(user.Id);
+            return await this.storageBroker.UpdateUserAsync(updatedUser);
+        }
+        catch (UserNullException userNullException)
+        {
+            var userValidationException = 
+                new UserValidationException(userNullException);
+
+            this.loggingBroker.LogError(userValidationException);
+            throw userValidationException;
+        }
+        
     }
 
     public async ValueTask<User> RemoveUserAsync(Guid id)

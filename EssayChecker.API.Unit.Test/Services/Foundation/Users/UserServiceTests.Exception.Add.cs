@@ -1,9 +1,9 @@
+using System;
 using System.Threading.Tasks;
 using EFxceptions.Models.Exceptions;
 using EssayChecker.API.Models.Foundation.Users;
 using EssayChecker.API.Models.Foundation.Users.Exceptions;
 using FluentAssertions;
-using FluentAssertions.Equivalency.Tracing;
 using Microsoft.Data.SqlClient;
 using Moq;
 using Xunit;
@@ -65,6 +65,10 @@ public partial class UserServiceTests
         var expectedUserDependencyValidationException =
             new UserDependencyValidationException(alreadyExistsUserException);
 
+        this.storageBrokerMock.Setup(broker =>
+            broker.InsertUserAsync(randomUser))
+            .Throws(duplicateKeyException);
+        
         // when
         ValueTask<User> addUserTask = this.userService.AddUserAsync(randomUser);
         
@@ -78,8 +82,44 @@ public partial class UserServiceTests
             broker.LogError(It.Is(SameExceptionAs(
                 expectedUserDependencyValidationException))),Times.Once);
         
+        storageBrokerMock.Verify(broker => 
+            broker.InsertUserAsync(randomUser),
+            Times.Once);
+        
         loggingBrokerMock.VerifyNoOtherCalls();
         storageBrokerMock.VerifyNoOtherCalls();
-        
     }   
+    
+    [Fact]
+    public async Task ShouldThrowServiceExceptionOnAddIfServiceErrorOccuredAndLogAsync()
+    {
+        // given
+        User randomUser = CreateRandomUser();
+        var serviceException = new Exception();
+        var failedUserServiceException = new FailedUserServiceException(serviceException);
+
+        var expectedUserServiceException = new UserServiceException(failedUserServiceException);
+
+        storageBrokerMock.Setup(broker =>
+            broker.InsertUserAsync(randomUser))
+            .ThrowsAsync(serviceException);
+        // when
+        ValueTask<User> addUserTask =  this.userService.AddUserAsync(randomUser);
+
+        UserServiceException actualUserServiceException =
+            await Assert.ThrowsAsync<UserServiceException>(addUserTask.AsTask);
+            
+        // then
+        actualUserServiceException.Should().BeEquivalentTo(expectedUserServiceException);
+        
+        loggingBrokerMock.Verify(broker =>
+            broker.LogError(It.Is(SameExceptionAs(
+                expectedUserServiceException))), Times.Once);
+        
+        storageBrokerMock.Verify(broker => 
+            broker.InsertUserAsync(randomUser), Times.Once);
+            
+        loggingBrokerMock.VerifyNoOtherCalls();
+        storageBrokerMock.VerifyNoOtherCalls();
+    }
 }

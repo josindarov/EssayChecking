@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EssayChecker.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c16496dc2898a688f3912251ef1fd661ac764cae")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ace6b648d66036b871e42201e47601d6f1149b9e")]
 [assembly: System.Reflection.AssemblyProductAttribute("EssayChecker.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EssayChecker.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

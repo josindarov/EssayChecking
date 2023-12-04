@@ -45,4 +45,54 @@ public partial class UserServiceTests
         loggingBrokerMock.VerifyNoOtherCalls();
         storageBrokerMock.VerifyNoOtherCalls();
     }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("  ")]
+    public async Task ShouldThrowValidationExceptionOnUpdateIfUserIsInvalidAndLogItAsync(
+        string invalidText)
+    {
+        // given
+        var invalidUser = new User()
+        {
+            Name = invalidText,
+            TelephoneNumber = invalidText
+        };
+
+        InvalidUserException invalidUserException = new InvalidUserException();
+        
+        invalidUserException.AddData(
+            key: nameof(User.Id),
+            values:"Id is required");
+        
+        invalidUserException.AddData(
+            key: nameof(User.Name),
+            values: "Name is required");
+        
+        invalidUserException.AddData(
+            key: nameof(User.TelephoneNumber),
+            values: "Telephone is required");
+
+        var expectedUserValidationException = 
+            new UserValidationException(invalidUserException);
+        
+        // when
+        ValueTask<User> updateUserTask = this.userService.ModifyUserAsync(invalidUser);
+
+        UserValidationException actualUserValidationException =
+            await Assert.ThrowsAsync<UserValidationException>(updateUserTask.AsTask);
+        // then
+        actualUserValidationException.Should().BeEquivalentTo(expectedUserValidationException);
+        
+        this.loggingBrokerMock.Verify(broker => 
+            broker.LogError(It.Is(SameExceptionAs(expectedUserValidationException)))
+            ,Times.Once);
+        
+        this.storageBrokerMock.Verify(broker => 
+            broker.UpdateUserAsync(invalidUser),Times.Never);
+        
+        this.loggingBrokerMock.VerifyNoOtherCalls();
+        this.storageBrokerMock.VerifyNoOtherCalls();
+    }
 }
