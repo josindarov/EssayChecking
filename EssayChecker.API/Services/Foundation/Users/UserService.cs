@@ -28,22 +28,23 @@ public partial class UserService : IUserService
         });
     
 
-    public async ValueTask<Models.Foundation.Users.User> RetrieveUserByIdAsync(Models.Foundation.Users.User user)
+    public async ValueTask<User> RetrieveUserByIdAsync(Guid id)
+    {
+        return await this.storageBroker.SelectUserByIdAsync(id);
+    }
+
+    public IQueryable<User> RetrieveAllUsers()
     {
         throw new System.NotImplementedException();
     }
 
-    public IQueryable<Models.Foundation.Users.User> RetrieveAllUsers()
+    public async ValueTask<User> ModifyUserAsync(User user)
     {
-        throw new System.NotImplementedException();
+        User updatedUser = await RetrieveUserByIdAsync(user.Id);
+        return await this.storageBroker.UpdateUserAsync(updatedUser);
     }
 
-    public async ValueTask<Models.Foundation.Users.User> ModifyUserAsync(Models.Foundation.Users.User user)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public async ValueTask<Models.Foundation.Users.User> RemoveUserAsync(Models.Foundation.Users.User user)
+    public async ValueTask<User> RemoveUserAsync(Guid id)
     {
         throw new System.NotImplementedException();
     }
