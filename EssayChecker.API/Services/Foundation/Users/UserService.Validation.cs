@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Diagnostics;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection.Metadata;
 using EssayChecker.API.Models.Foundation.Users;
@@ -72,6 +73,4 @@ public partial class UserService
         
         invalidUserException.ThrowIfContainsErrors();
     }
-    
-    
 }

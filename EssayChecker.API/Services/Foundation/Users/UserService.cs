@@ -5,8 +5,6 @@ using EssayChecker.API.Brokers.DateTimes;
 using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.Storages;
 using EssayChecker.API.Models.Foundation.Users;
-using EssayChecker.API.Models.Foundation.Users.Exceptions;
-using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace EssayChecker.API.Services.Foundation.Users;
 
@@ -40,11 +38,9 @@ public partial class UserService : IUserService
             return user;
         });
 
-    public IQueryable<User> RetrieveAllUsers()
-    { 
-        return this.storageBroker.SelectAllUsers();
-    }
-
+    public IQueryable<User> RetrieveAllUsers() =>
+        TryCatch(() => this.storageBroker.SelectAllUsers());
+    
     public ValueTask<User> ModifyUserAsync(User user) =>
         TryCatch(async () =>
         {
