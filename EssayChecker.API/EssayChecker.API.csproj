@@ -21,9 +21,4 @@
     <PackageReference Include="Xeption" Version="2.6.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Foundation\Essays\" />
-    <Folder Include="Services\Foundation\Feedbacks\" />
-  </ItemGroup>
-
 </Project>
