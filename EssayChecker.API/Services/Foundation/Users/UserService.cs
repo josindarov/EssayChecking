@@ -45,6 +45,7 @@ public partial class UserService : IUserService
         TryCatch(async () =>
         {
             ValidateUserOnModify(user);
+            
             User updatedUser = await this.storageBroker
                 .SelectUserByIdAsync(user.Id);
             

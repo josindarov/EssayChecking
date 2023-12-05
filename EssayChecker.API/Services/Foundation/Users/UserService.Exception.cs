@@ -43,11 +43,11 @@ public partial class UserService
             var failedUserServiceException =
                 new FailedUserServiceException(exception);
 
-            throw CreateAndLogUserValidationException(failedUserServiceException);
+            throw CreateAndLogUserServiceException(failedUserServiceException);
         }
     }
 
-    private Exception CreateAndLogUserValidationException(Exception exception)
+    private Exception CreateAndLogUserServiceException(Exception exception)
     {
         UserServiceException userServiceException = 
             new UserServiceException(exception);
@@ -82,11 +82,5 @@ public partial class UserService
         return userDependencyException;
     }
     
-    private UserServiceException CreateAndLogServiceException(Xeption exception)
-    {
-        var userServiceException = new UserServiceException(exception);
-        
-        this.loggingBroker.LogError(userServiceException);
-        return userServiceException;
-    }
+    
 }
