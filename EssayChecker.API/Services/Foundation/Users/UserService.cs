@@ -29,12 +29,16 @@ public partial class UserService : IUserService
             ValidateUserOnAdd(user);
             return await storageBroker.InsertUserAsync(user);
         });
-    
 
-    public async ValueTask<User> RetrieveUserByIdAsync(Guid id)
-    {
-        return await this.storageBroker.SelectUserByIdAsync(id);
-    }
+
+    public ValueTask<User> RetrieveUserByIdAsync(Guid id) =>
+        TryCatch(async () =>
+        {
+            ValidateUserId(id);
+            User user = await this.storageBroker.SelectUserByIdAsync(id);
+            ValidateStorageUser(user, id);
+            return user;
+        });
 
     public IQueryable<User> RetrieveAllUsers()
     {
