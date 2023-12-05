@@ -50,7 +50,7 @@ public partial class UserService
             var failedUserServiceException =
                 new FailedUserServiceException(exception);
 
-            throw CreateAndLogUserServiceException(failedUserServiceException);
+            throw CreateAndLogServiceException(failedUserServiceException);
         }
     }
     
@@ -67,9 +67,16 @@ public partial class UserService
 
             throw CreateAndLogCriticalDependencyException(failedUserStorageException);
         }
+        catch (Exception serviceException)
+        {
+            var failedServiceUserException =
+                new FailedUserServiceException(serviceException);
+
+            throw CreateAndLogServiceException(failedServiceUserException);
+        }
     }
 
-    private Exception CreateAndLogUserServiceException(Exception exception)
+    private Exception CreateAndLogServiceException(Exception exception)
     {
         UserServiceException userServiceException = 
             new UserServiceException(exception);
