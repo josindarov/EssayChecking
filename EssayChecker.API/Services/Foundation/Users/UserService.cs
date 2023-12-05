@@ -57,6 +57,10 @@ public partial class UserService : IUserService
 
     public async ValueTask<User> RemoveUserAsync(Guid id)
     {
-        throw new System.NotImplementedException();
+        User deletedUser = 
+            await this.storageBroker.SelectUserByIdAsync(id);
+        
+        return await this.storageBroker
+            .DeleteUserAsync(deletedUser);
     }
 }
