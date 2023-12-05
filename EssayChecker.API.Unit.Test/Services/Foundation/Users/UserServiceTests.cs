@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq.Expressions;
-using System.Reflection;
 using System.Runtime.Serialization;
 using EssayChecker.API.Brokers.DateTimes;
 using EssayChecker.API.Brokers.Loggings;
@@ -12,7 +11,6 @@ using Moq;
 using Tynamix.ObjectFiller;
 using Xeptions;
 using Xunit;
-using Xunit.Sdk;
 
 namespace EssayChecker.API.Unit.Test.Services.Foundation.Users
 {
@@ -68,7 +66,5 @@ namespace EssayChecker.API.Unit.Test.Services.Foundation.Users
 
         private static Filler<User> CreateUserFiller() =>
             new Filler<User>();
-
-
-    }
+        }
 }
