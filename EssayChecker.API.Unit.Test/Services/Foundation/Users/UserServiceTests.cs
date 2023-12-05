@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using EssayChecker.API.Brokers.DateTimes;
@@ -59,6 +60,12 @@ namespace EssayChecker.API.Unit.Test.Services.Foundation.Users
         private static string GetRandomString() =>
             new MnemonicString(wordCount: GetRandomNumber()).GetValue();
              
+        private static IQueryable<User> CreateRandomUsers()
+        {
+            return CreateUserFiller()
+                .Create(count: GetRandomNumber())
+                .AsQueryable();
+        }
         
 
         private static User CreateRandomUser() =>
