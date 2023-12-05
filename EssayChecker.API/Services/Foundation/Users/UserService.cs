@@ -55,12 +55,14 @@ public partial class UserService : IUserService
                 .UpdateUserAsync(updatedUser);
         });
 
-    public async ValueTask<User> RemoveUserAsync(Guid id)
-    {
-        User deletedUser = 
-            await this.storageBroker.SelectUserByIdAsync(id);
-        
-        return await this.storageBroker
-            .DeleteUserAsync(deletedUser);
-    }
+    public ValueTask<User> RemoveUserAsync(Guid id) =>
+        TryCatch(async () =>
+        {
+            ValidateUserId(id);
+            User deletedUser = await this.storageBroker.SelectUserByIdAsync(id);
+            ValidateStorageUser(deletedUser, id);
+
+            return await this.storageBroker
+                .DeleteUserAsync(deletedUser);
+        });
 }

@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using System.Diagnostics;
 using System.Linq.Expressions;
+using System.Reflection.Metadata;
 using EssayChecker.API.Models.Foundation.Users;
 using EssayChecker.API.Models.Foundation.Users.Exceptions;
 
@@ -39,6 +40,9 @@ public partial class UserService
             throw new NotFoundUserException(userId);
         }
     }
+
+    private void ValidateUserId(Guid id) =>
+        Validate((Rule: IsInvalid(id), Parameter: nameof(User.Id)));
 
     private static dynamic IsInvalid(Guid id) => new
     {

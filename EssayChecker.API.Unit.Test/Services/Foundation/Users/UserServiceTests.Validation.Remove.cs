@@ -23,13 +23,13 @@ public partial class UserServiceTests
             values: "Id is required");
         
         var expectedUserDependencyException = 
-            new UserDependencyException(invalidUserException);
+            new UserValidationException(invalidUserException);
         
         // when
         ValueTask<User> removeUserById = this.userService.RemoveUserAsync(invalidId);
 
-        UserDependencyException actualUserDependencyException =
-            await Assert.ThrowsAsync<UserDependencyException>(removeUserById.AsTask);
+        UserValidationException actualUserDependencyException =
+            await Assert.ThrowsAsync<UserValidationException>(removeUserById.AsTask);
 
         // then
         actualUserDependencyException.Should().BeEquivalentTo(expectedUserDependencyException);
