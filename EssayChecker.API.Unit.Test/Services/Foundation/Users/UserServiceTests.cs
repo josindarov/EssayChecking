@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
-using EssayChecker.API.Brokers.DateTimes;
 using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.Storages;
 using EssayChecker.API.Models.Foundation.Users;
@@ -20,18 +19,15 @@ namespace EssayChecker.API.Unit.Test.Services.Foundation.Users
         private readonly Mock<IStorageBroker> storageBrokerMock;
         private readonly Mock<ILoggingBroker> loggingBrokerMock;
         private readonly IUserService userService;
-        private readonly Mock<IDateTimeBroker> dateTimeBrokerMock;
 
         public UserServiceTests()
         {
             this.storageBrokerMock = new Mock<IStorageBroker>();
             this.loggingBrokerMock = new Mock<ILoggingBroker>();
-            this.dateTimeBrokerMock = new Mock<IDateTimeBroker>();
             
             this.userService = new UserService(
                 storageBroker: storageBrokerMock.Object,
-                loggingBroker:loggingBrokerMock.Object,
-                dateTimeBroker: dateTimeBrokerMock.Object);
+                loggingBroker:loggingBrokerMock.Object);
         }
         public static TheoryData<int> InvalidMinutes()
         {
