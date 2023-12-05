@@ -68,11 +68,11 @@ public partial class UserServiceTests
         
         invalidUserException.AddData(
             key: nameof(User.Name),
-            values: "Name is required");
+            values: "Text is required");
         
         invalidUserException.AddData(
             key: nameof(User.TelephoneNumber),
-            values: "Telephone is required");
+            values: "Text is required");
 
         var expectedUserValidationException = 
             new UserValidationException(invalidUserException);

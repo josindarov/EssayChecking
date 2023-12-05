@@ -16,11 +16,27 @@ public partial class UserService
             (Rule: IsInvalid(user.Name), Parameter: nameof(User.Name)),
             (Rule: IsInvalid(user.TelephoneNumber), Parameter: nameof(User.TelephoneNumber)));
     }
+    
+    private static void ValidateUserOnModify(User user)
+    {
+        ValidateUserNotNull(user);
+        Validate((Rule: IsInvalid(user.Id), Parameter: nameof(User.Id)),
+            (Rule: IsInvalid(user.Name), Parameter: nameof(User.Name)),
+            (Rule: IsInvalid(user.TelephoneNumber), Parameter: nameof(User.TelephoneNumber)));
+    }
     private static void ValidateUserNotNull(User user)
     {
         if (user is null)
         {
             throw new UserNullException();
+        }
+    }
+
+    private static void ValidateStorageUser(User user, Guid userId)
+    {
+        if (user is null)
+        {
+            throw new NotFoundUserException(userId);
         }
     }
 
