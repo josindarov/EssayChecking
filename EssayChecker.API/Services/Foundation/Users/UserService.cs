@@ -41,27 +41,18 @@ public partial class UserService : IUserService
         throw new System.NotImplementedException();
     }
 
-    public async ValueTask<User> ModifyUserAsync(User user)
-    {
-        try
+    public ValueTask<User> ModifyUserAsync(User user) =>
+        TryCatch(async () =>
         {
-            if (user is null)
-            {
-                throw new UserNullException();
-            }
-            User updatedUser = await RetrieveUserByIdAsync(user.Id);
-            return await this.storageBroker.UpdateUserAsync(updatedUser);
-        }
-        catch (UserNullException userNullException)
-        {
-            var userValidationException = 
-                new UserValidationException(userNullException);
-
-            this.loggingBroker.LogError(userValidationException);
-            throw userValidationException;
-        }
-        
-    }
+            ValidateUserOnModify(user);
+            User updatedUser = await this.storageBroker
+                .SelectUserByIdAsync(user.Id);
+            
+            ValidateStorageUser(updatedUser, user.Id);
+            
+            return await this.storageBroker
+                .UpdateUserAsync(updatedUser);
+        });
 
     public async ValueTask<User> RemoveUserAsync(Guid id)
     {
