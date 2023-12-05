@@ -48,5 +48,47 @@ public partial class UserServiceTests
         this.storageBrokerMock.VerifyNoOtherCalls();
         this.loggingBrokerMock.VerifyNoOtherCalls();
     }
+    
+    [Fact]
+    public void ShouldThrowServiceExceptionOnRetrieveAllWhenServiceErrorOccursAndLogIt()
+    {
+        //given
+        string exceptionMessage = GetRandomString();
+        var serviceException = new Exception(exceptionMessage);
+
+        var failedUserServiceException =
+            new FailedUserServiceException(serviceException);
+
+        var expectedUserServiceException =
+            new UserServiceException(failedUserServiceException);
+
+        this.storageBrokerMock.Setup(broker =>
+                broker.SelectAllUsers())
+            .Throws(serviceException);
+
+        //when
+        Action retrieveAllUsersAction = () =>
+            this.userService.RetrieveAllUsers();
+
+        UserServiceException actualUserServiceException = 
+            Assert.Throws<UserServiceException>(retrieveAllUsersAction);
+
+        //then
+        actualUserServiceException.Should().BeEquivalentTo(
+            expectedUserServiceException);
+
+        this.storageBrokerMock.Verify(broker =>
+                broker.SelectAllUsers(),
+            Times.Once);
+
+        this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedUserServiceException))),
+            Times.Once);
+
+        this.storageBrokerMock.VerifyNoOtherCalls();
+        this.loggingBrokerMock.VerifyNoOtherCalls();
+    }
+
 
 }
