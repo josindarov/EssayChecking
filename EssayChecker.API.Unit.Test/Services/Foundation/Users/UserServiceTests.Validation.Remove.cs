@@ -47,5 +47,42 @@ public partial class UserServiceTests
         this.loggingBrokerMock.VerifyNoOtherCalls();
         this.storageBrokerMock.VerifyNoOtherCalls();
     }
+
+    [Fact]
+    public async Task ShouldThrowNotFoundExceptionOnRemoveIsNotFoundAndLogItAsync()
+    {
+        // given
+        Guid inputUserId = Guid.NewGuid();
+        User noUser = null;
+
+        var notFoundUserException = new NotFoundUserException(inputUserId);
+
+        UserValidationException expectedUserValidationException =
+            new UserValidationException(notFoundUserException);
+
+        this.storageBrokerMock.Setup(broker =>
+                broker.SelectUserByIdAsync(It.IsAny<Guid>()))
+            .ReturnsAsync(noUser);
+        
+        // when
+        ValueTask<User> removeUserTask = this.userService.RemoveUserAsync(inputUserId);
+
+        UserValidationException actualUserValidationException =
+            await Assert.ThrowsAsync<UserValidationException>(removeUserTask.AsTask);
+        
+        // then
+        actualUserValidationException.Should().BeEquivalentTo(
+            expectedUserValidationException);
+        
+        this.storageBrokerMock.Verify(broker => 
+            broker.SelectUserByIdAsync(It.IsAny<Guid>()),Times.Once);
+        
+        this.loggingBrokerMock.Verify(broker => 
+            broker.LogError(It.Is(SameExceptionAs(expectedUserValidationException))), 
+            Times.Once);
+        
+        this.storageBrokerMock.VerifyNoOtherCalls();
+        this.loggingBrokerMock.VerifyNoOtherCalls();
+    }
     
 }
