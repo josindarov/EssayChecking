@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using EssayChecker.API.Brokers.DateTimes;
 using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.Storages;
 using EssayChecker.API.Models.Foundation.Users;
@@ -12,13 +11,11 @@ public partial class UserService : IUserService
 {
     private readonly IStorageBroker storageBroker;
     private readonly ILoggingBroker loggingBroker;
-    private readonly IDateTimeBroker dateTimeBroker;
 
-    public UserService(IStorageBroker storageBroker, ILoggingBroker loggingBroker, IDateTimeBroker dateTimeBroker)
+    public UserService(IStorageBroker storageBroker, ILoggingBroker loggingBroker)
     {
         this.storageBroker = storageBroker;
         this.loggingBroker = loggingBroker;
-        this.dateTimeBroker = dateTimeBroker;
     }
 
     public ValueTask<User> AddUserAsync(User user) =>
