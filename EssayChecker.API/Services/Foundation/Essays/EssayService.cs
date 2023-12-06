@@ -25,12 +25,12 @@ public partial class EssayService : IEssayService
             return await this.storageBroker.InsertEssayAsync(essay);
         });
 
-    public IQueryable<Essay> SelectAllEssays()
+    public IQueryable<Essay> RetrieveAllEssays()
     {
         throw new NotImplementedException();
     }
 
-    public async ValueTask<Essay> SelectEssayById(Guid id)
+    public async ValueTask<Essay> RetrieveEssayById(Guid id)
     {
         throw new NotImplementedException();
     }
