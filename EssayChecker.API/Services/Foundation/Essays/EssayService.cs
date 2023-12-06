@@ -4,10 +4,11 @@ using System.Threading.Tasks;
 using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.Storages;
 using EssayChecker.API.Models.Foundation.Essays;
+using EssayChecker.API.Models.Foundation.Essays.Exceptions;
 
 namespace EssayChecker.API.Services.Foundation.Essays;
 
-public class EssayService : IEssayService
+public partial class EssayService : IEssayService
 {
     private readonly ILoggingBroker loggingBroker;
     private readonly IStorageBroker storageBroker;
@@ -18,7 +19,22 @@ public class EssayService : IEssayService
     }
     public async ValueTask<Essay> InsertEssayAsync(Essay essay)
     {
-        return await this.storageBroker.InsertEssayAsync(essay);
+        try
+        {
+            if (essay is null)
+            {
+                throw new EssayNullException();
+            }
+            return await this.storageBroker.InsertEssayAsync(essay);
+        }
+        catch (EssayNullException essayNullException)
+        {
+            EssayValidationException essayValidationException = 
+                new EssayValidationException(essayNullException);
+
+            throw essayValidationException;
+        }
+        
     }
 
     public IQueryable<Essay> SelectAllEssays()
