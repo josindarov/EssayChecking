@@ -26,6 +26,10 @@ public partial class EssayService
         {
             throw CreateAndLogValidationException(invalidEssayException);
         }
+        catch (NotFoundEssayException notFoundEssayException)
+        {
+            throw CreateAndLogValidationException(notFoundEssayException);
+        }
         catch (SqlException sqlException)
         {
             var failedEssayStorageException =
