@@ -30,8 +30,12 @@ public partial class EssayService : IEssayService
         throw new NotImplementedException();
     }
 
-    public async ValueTask<Essay> RetrieveEssayById(Guid id)
-    {
-        return await this.storageBroker.SelectEssayByIdAsync(id);
-    }
+    public ValueTask<Essay> RetrieveEssayById(Guid id) =>
+        TryCatch(async () =>
+        {
+            ValidateEssayId(id);
+            Essay essay = await this.storageBroker.SelectEssayByIdAsync(id);
+            ValidateStorageEssay(essay, id);
+            return essay;
+        });
 }
