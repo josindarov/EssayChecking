@@ -28,11 +28,27 @@ public partial class EssayService
         }
         catch (SqlException sqlException)
         {
-            var failedEssayStorageException = 
+            var failedEssayStorageException =
                 new FailedEssayStorageException(sqlException);
 
             throw CreateAndLogCriticalDependencyException(failedEssayStorageException);
         }
+        catch (Exception exception)
+        {
+            var failedEssayServiceException = 
+                new FailedEssayServiceException(exception);
+
+            throw CreateAndLogServiceException(failedEssayServiceException);
+        }
+    }
+
+    private EssayServiceException CreateAndLogServiceException(Exception exception)
+    {
+        var essayServiceException = 
+            new EssayServiceException(exception);
+
+        this.loggingBroker.LogError(essayServiceException);
+        return essayServiceException;
     }
 
     private Exception CreateAndLogCriticalDependencyException(Exception exception)
