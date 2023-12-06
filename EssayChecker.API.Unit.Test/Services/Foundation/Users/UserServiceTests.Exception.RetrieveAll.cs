@@ -29,11 +29,11 @@ public partial class UserServiceTests
         Action retrieveAllUsersAction = () =>
             this.userService.RetrieveAllUsers();
 
-        UserDependencyException actualGroupDependencyException = 
+        UserDependencyException actualUserDependencyException = 
             Assert.Throws<UserDependencyException>(retrieveAllUsersAction);
 
         // then
-        actualGroupDependencyException.Should().BeEquivalentTo(
+        actualUserDependencyException.Should().BeEquivalentTo(
             expectedUserDependencyException);
 
         this.storageBrokerMock.Verify(broker =>

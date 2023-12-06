@@ -33,6 +33,10 @@ public partial class EssayServiceTests
     
     private static int GetRandomNumber() =>
         new IntRange(min: 9, max: 99).GetValue();
+    
+    private static string GetRandomString() =>
+        new MnemonicString(wordCount: GetRandomNumber()).GetValue();
+    
     private static IQueryable<Essay> CreateRandomEssays()
     {
         return CreateEssayFiller()
