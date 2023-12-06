@@ -1,7 +1,5 @@
-using System;
 using System.Threading.Tasks;
 using EssayChecker.API.Models.Foundation.Essays;
-using EssayChecker.API.Models.Foundation.Users;
 using FluentAssertions;
 using Force.DeepCloner;
 using Moq;
