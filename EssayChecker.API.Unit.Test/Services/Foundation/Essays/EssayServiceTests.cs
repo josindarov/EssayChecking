@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using EssayChecker.API.Brokers.Loggings;
@@ -29,6 +30,15 @@ public partial class EssayServiceTests
 
     private static Essay CreateRandomEssay() =>
         CreateEssayFiller().Create();
+    
+    private static int GetRandomNumber() =>
+        new IntRange(min: 9, max: 99).GetValue();
+    private static IQueryable<Essay> CreateRandomEssays()
+    {
+        return CreateEssayFiller()
+            .Create(count: GetRandomNumber())
+            .AsQueryable();
+    }
     private static Filler<Essay> CreateEssayFiller() =>
         new Filler<Essay>();
     private static Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedException) =>
