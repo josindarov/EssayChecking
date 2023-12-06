@@ -72,7 +72,7 @@ public partial class UserServiceTests
             new UserServiceException(failedUserServiceException);
 
         this.storageBrokerMock.Setup(broker =>
-            broker.SelectUserByIdAsync(randomUser.Id));
+            broker.SelectUserByIdAsync(randomUser.Id)).ReturnsAsync(randomUser);
 
         this.storageBrokerMock.Setup(broker =>
             broker.UpdateUserAsync(randomUser)).ThrowsAsync(serviceException);
@@ -90,7 +90,7 @@ public partial class UserServiceTests
             broker.SelectUserByIdAsync(randomUser.Id),Times.Once);
         
         this.storageBrokerMock.Verify(broker => 
-            broker.UpdateUserAsync(randomUser),Times.Never);
+            broker.UpdateUserAsync(randomUser),Times.Once);
         
         this.loggingBrokerMock.Verify(broker =>
             broker.LogError(It.Is(SameExceptionAs(expectedUserServiceException))),
