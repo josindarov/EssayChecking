@@ -32,7 +32,7 @@ public partial class EssayServiceTests
         
         this.loggingBrokerMock.Verify(broker => 
             broker.LogError(It.Is(SameExceptionAs(expectedEssayValidationException))),
-            Times.Once);
+            Times.Never);
         
         this.loggingBrokerMock.VerifyNoOtherCalls();
         this.storageBrokerMock.VerifyNoOtherCalls();
