@@ -27,7 +27,7 @@ public partial class EssayService : IEssayService
 
     public IQueryable<Essay> RetrieveAllEssays()
     {
-        throw new NotImplementedException();
+        return this.storageBroker.SelectAllEssays();
     }
 
     public ValueTask<Essay> RetrieveEssayById(Guid id) =>
