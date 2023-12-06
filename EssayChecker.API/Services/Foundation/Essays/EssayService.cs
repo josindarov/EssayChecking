@@ -17,25 +17,13 @@ public partial class EssayService : IEssayService
         this.storageBroker = storageBroker;
         this.loggingBroker = loggingBroker;
     }
-    public async ValueTask<Essay> InsertEssayAsync(Essay essay)
-    {
-        try
-        {
-            if (essay is null)
-            {
-                throw new EssayNullException();
-            }
-            return await this.storageBroker.InsertEssayAsync(essay);
-        }
-        catch (EssayNullException essayNullException)
-        {
-            EssayValidationException essayValidationException = 
-                new EssayValidationException(essayNullException);
 
-            throw essayValidationException;
-        }
-        
-    }
+    public ValueTask<Essay> InsertEssayAsync(Essay essay) =>
+        TryCatch(async () =>
+        {
+            ValidateEssayOnAdd(essay);
+            return await this.storageBroker.InsertEssayAsync(essay);
+        });
 
     public IQueryable<Essay> SelectAllEssays()
     {
