@@ -2,8 +2,6 @@ using System;
 using System.Threading.Tasks;
 using EssayChecker.API.Models.Foundation.Essays;
 using EssayChecker.API.Models.Foundation.Essays.Exceptions;
-using EssayChecker.API.Models.Foundation.Users;
-using EssayChecker.API.Models.Foundation.Users.Exceptions;
 using FluentAssertions;
 using Microsoft.Data.SqlClient;
 using Moq;
