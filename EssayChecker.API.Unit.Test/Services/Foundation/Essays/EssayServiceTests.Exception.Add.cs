@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using EssayChecker.API.Models.Foundation.Essays;
 using EssayChecker.API.Models.Foundation.Essays.Exceptions;
@@ -45,5 +46,38 @@ public partial class EssayServiceTests
         this.loggingBrokerMock.VerifyNoOtherCalls();
         this.storageBrokerMock.VerifyNoOtherCalls();
         
+    }
+    
+    [Fact]
+    public async Task ShouldThrowServiceExceptionOnAddIfServiceErrorOccuredAndLogIdAsync()
+    {
+        // given
+        Essay randomEssay = CreateRandomEssay();
+        var serviceException = new Exception();
+        var failedEssayServiceException = new FailedEssayServiceException(serviceException);
+
+        var expectedEssayServiceException = new EssayServiceException(failedEssayServiceException);
+
+        storageBrokerMock.Setup(broker =>
+                broker.InsertEssayAsync(randomEssay))
+            .ThrowsAsync(serviceException);
+        // when
+        ValueTask<Essay> addEssayTask = this.essayService.InsertEssayAsync(randomEssay);
+
+        EssayServiceException actualEssayServiceException =
+            await Assert.ThrowsAsync<EssayServiceException>(addEssayTask.AsTask);
+
+        // then
+        actualEssayServiceException.Should().BeEquivalentTo(expectedEssayServiceException);
+
+        loggingBrokerMock.Verify(broker =>
+            broker.LogError(It.Is(SameExceptionAs(
+                expectedEssayServiceException))), Times.Once);
+
+        storageBrokerMock.Verify(broker =>
+            broker.InsertEssayAsync(randomEssay), Times.Once);
+
+        loggingBrokerMock.VerifyNoOtherCalls();
+        storageBrokerMock.VerifyNoOtherCalls();
     }
 }
