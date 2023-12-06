@@ -32,6 +32,6 @@ public partial class EssayService : IEssayService
 
     public async ValueTask<Essay> RetrieveEssayById(Guid id)
     {
-        throw new NotImplementedException();
+        return await this.storageBroker.SelectEssayByIdAsync(id);
     }
 }
