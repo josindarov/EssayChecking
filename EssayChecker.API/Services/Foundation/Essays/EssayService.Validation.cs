@@ -26,12 +26,24 @@ public partial class EssayService
         Condition = id == Guid.Empty,
         Message = "Id is required"
     };
-
+    
     private static dynamic IsInvalid(string name) => new
     {
         Condition = string.IsNullOrWhiteSpace(name),
         Message = "Text is required"
     };
+    
+    private void ValidateEssayId(Guid id) =>
+        Validate((Rule: IsInvalid(id), Parameter: nameof(Essay.Id)));
+    
+    private static void ValidateStorageEssay(Essay essay, Guid essayId)
+    {
+        if (essay is null)
+        {
+            throw new NotFoundEssayException(essayId);
+        }
+    }
+    
     private static void Validate(params (dynamic rule, string Parameter)[] validations)
     {
         var invalidEssayException = new InvalidEssayException();
