@@ -63,15 +63,15 @@ public partial class UserServiceTests
             .ThrowsAsync(serviceException);
 
         //when
-        ValueTask<User> retrieveGroupByIdTask =
+        ValueTask<User> retrieveUserByIdTask =
             this.userService.RetrieveUserByIdAsync(someUserId);
 
-        UserServiceException actualGroupServiceException = 
+        UserServiceException actualUserServiceException = 
             await Assert.ThrowsAsync<UserServiceException>(
-                retrieveGroupByIdTask.AsTask);
+                retrieveUserByIdTask.AsTask);
 
         //then
-        actualGroupServiceException.Should().BeEquivalentTo(
+        actualUserServiceException.Should().BeEquivalentTo(
             expectedUserServiceException);
 
         this.storageBrokerMock.Verify(broker =>
