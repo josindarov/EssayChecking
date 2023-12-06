@@ -8,6 +8,6 @@ namespace EssayChecker.API.Services.Foundation.Essays;
 public interface IEssayService
 {
     ValueTask<Essay> InsertEssayAsync(Essay essay);
-    IQueryable<Essay> SelectAllEssays();
-    ValueTask<Essay> SelectEssayById(Guid id);
+    IQueryable<Essay> RetrieveAllEssays();
+    ValueTask<Essay> RetrieveEssayById(Guid id);
 }
