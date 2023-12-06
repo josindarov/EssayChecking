@@ -1,9 +1,12 @@
+using System;
+using System.Linq.Expressions;
 using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.Storages;
 using EssayChecker.API.Models.Foundation.Essays;
 using EssayChecker.API.Services.Foundation.Essays;
 using Moq;
 using Tynamix.ObjectFiller;
+using Xeptions;
 
 namespace EssayChecker.API.Unit.Test.Services.Foundation.Essays;
 
@@ -27,5 +30,8 @@ public partial class EssayServiceTests
 
     private static Filler<Essay> CreateEssayFiller() =>
         new Filler<Essay>();
+    
+    private static Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedException) =>
+        actualException => actualException.SameExceptionAs(expectedException);
 
 }
