@@ -61,6 +61,14 @@ public partial class EssayService
 
             throw CreateAndLogCriticalDependencyException(failedEssayStorageException);
         }
+        catch (Exception exception)
+        {
+            var failedEssayServiceException = 
+                new FailedEssayServiceException(exception);
+
+            throw CreateAndLogServiceException(failedEssayServiceException);
+
+        }
     }
 
     private EssayServiceException CreateAndLogServiceException(Exception exception)
