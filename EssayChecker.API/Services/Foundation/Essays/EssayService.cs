@@ -25,11 +25,9 @@ public partial class EssayService : IEssayService
             return await this.storageBroker.InsertEssayAsync(essay);
         });
 
-    public IQueryable<Essay> RetrieveAllEssays()
-    {
-        return this.storageBroker.SelectAllEssays();
-    }
-
+    public IQueryable<Essay> RetrieveAllEssays() =>
+        TryCatch(() => this.storageBroker.SelectAllEssays());
+    
     public ValueTask<Essay> RetrieveEssayById(Guid id) =>
         TryCatch(async () =>
         {

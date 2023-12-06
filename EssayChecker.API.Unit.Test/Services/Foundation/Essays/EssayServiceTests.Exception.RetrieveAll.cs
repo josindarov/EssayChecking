@@ -20,7 +20,7 @@ public partial class EssayServiceTests
             new FailedEssayStorageException(sqlException);
 
         var expectedEssayDependencyException =
-            new UserDependencyException(failedEssayStorageException);
+            new EssayDependencyException(failedEssayStorageException);
 
         this.storageBrokerMock.Setup(broker =>
                 broker.SelectAllEssays())

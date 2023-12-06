@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using EssayChecker.API.Models.Foundation.Essays;
 using EssayChecker.API.Models.Foundation.Essays.Exceptions;
@@ -11,6 +12,7 @@ namespace EssayChecker.API.Services.Foundation.Essays;
 public partial class EssayService
 {
     private delegate ValueTask<Essay> ReturningUserFunction();
+    private delegate IQueryable<Essay> ReturningEssaysFunction();
 
     private async ValueTask<Essay> TryCatch(ReturningUserFunction returningUserFunction)
     {
@@ -43,6 +45,21 @@ public partial class EssayService
                 new FailedEssayServiceException(exception);
 
             throw CreateAndLogServiceException(failedEssayServiceException);
+        }
+    }
+
+    private IQueryable<Essay> TryCatch(ReturningEssaysFunction returningEssaysFunction)
+    {
+        try
+        {
+            return returningEssaysFunction();
+        }
+        catch (SqlException sqlException)
+        {
+            var failedEssayStorageException =
+                new FailedEssayStorageException(sqlException);
+
+            throw CreateAndLogCriticalDependencyException(failedEssayStorageException);
         }
     }
 

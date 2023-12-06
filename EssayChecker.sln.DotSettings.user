@@ -1,5 +1,10 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b9b67f31_002D0bad_002D4cdb_002D9229_002D8b6736b338bf/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShouldThrowValidationExceptionOnAddIfUserIsNullAndLogItAsync" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=9fa23d6b_002D491b_002D4619_002D9b8c_002Db99a074496c7/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfSqlErrorOccursAndLogIt" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfSqlErrorOccursAndLogIt&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b9b67f31_002D0bad_002D4cdb_002D9229_002D8b6736b338bf/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ShouldThrowValidationExceptionOnAddIfUserIsNullAndLogItAsync" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldThrowValidationExceptionOnAddIfEssayIsInvalidAndLogItAsync&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldThrowCriticalDependencyExceptionOnAddIfSqlErrorOccursAndLogItAsync&lt;/TestId&gt;&#xD;
