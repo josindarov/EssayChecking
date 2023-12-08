@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.Storages;
 using EssayChecker.API.Models.Foundation.Feedbacks;
+using EssayChecker.API.Models.Foundation.Feedbacks.Exceptions;
 
 namespace EssayChecker.API.Services.Foundation.Feedbacks;
 
@@ -20,7 +21,18 @@ public class FeedbackService : IFeedbackService
     }
     public async ValueTask<Feedback> AddFeedbackAsync(Feedback feedback)
     {
-        return await storageBroker.InsertFeedbackAsync(feedback);
+        try
+        {
+            if (feedback is null)
+            {
+                throw new FeedbackNullException();
+            }
+            return await storageBroker.InsertFeedbackAsync(feedback);
+        }
+        catch (FeedbackNullException feedbackNullException)
+        {
+            throw new FeedbackValidationException(feedbackNullException);
+        }
     }
 
     public IQueryable<Feedback> RetrieveAllFeedbacks()

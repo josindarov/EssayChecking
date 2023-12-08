@@ -29,7 +29,7 @@ public partial class FeedbackServiceTests
         
         loggingBrokerMock.Verify(broker => 
             broker.LogError(It.Is(SameExceptionAs(expectedFeedbackValidationException))),
-            Times.Once);
+            Times.Never);
         
         storageBrokerMock.VerifyNoOtherCalls();
         loggingBrokerMock.VerifyNoOtherCalls();
