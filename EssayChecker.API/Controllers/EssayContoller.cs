@@ -30,13 +30,32 @@ public class EssayController : RESTFulController
         {
             return BadRequest(essayValidationException.InnerException);
         }
+        catch (EssayDependencyException essayDependencyException)
+        {
+            return InternalServerError(essayDependencyException);
+        }
+        catch (EssayServiceException essayServiceException)
+        {
+            return InternalServerError(essayServiceException);
+        }
     }
 
     [HttpGet]
     public ActionResult<IQueryable<Essay>> GetAllEssays()
     {
-        IQueryable<Essay> essays = this.essayService.RetrieveAllEssays();
-        return Ok(essays);
+        try
+        {
+            IQueryable<Essay> essays = this.essayService.RetrieveAllEssays();
+            return Ok(essays);
+        }
+        catch (EssayDependencyException essayDependencyException)
+        {
+            return InternalServerError(essayDependencyException);
+        }
+        catch (EssayServiceException essayServiceException)
+        {
+            return InternalServerError(essayServiceException);
+        }
     }
 
     [HttpGet("{id}")]
@@ -48,8 +67,21 @@ public class EssayController : RESTFulController
             return Ok(essay);
         }
         catch (EssayValidationException essayValidationException)
+            when (essayValidationException.InnerException is NotFoundEssayException)
+        {
+            return NotFound(essayValidationException.InnerException);
+        }
+        catch (EssayValidationException essayValidationException)
         {
             return BadRequest(essayValidationException.InnerException);
+        }
+        catch (EssayDependencyException essayDependencyException)
+        {
+            return InternalServerError(essayDependencyException);
+        }
+        catch (EssayServiceException essayServiceException)
+        {
+            return InternalServerError(essayServiceException);
         }
     }
     
