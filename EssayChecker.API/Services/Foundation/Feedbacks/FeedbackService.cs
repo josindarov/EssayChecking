@@ -20,7 +20,7 @@ public class FeedbackService : IFeedbackService
     }
     public async ValueTask<Feedback> AddFeedbackAsync(Feedback feedback)
     {
-        throw new NotImplementedException();
+        return await storageBroker.InsertFeedbackAsync(feedback);
     }
 
     public IQueryable<Feedback> RetrieveAllFeedbacks()
