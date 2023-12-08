@@ -23,5 +23,6 @@
     &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Users.UserServiceTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldEssayAddAsync&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Feedbacks.FeedbackServiceTests.ShouldFeedbackAddAsync&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Feedbacks.FeedbackServiceTests.ShouldThrowValidationExceptionIfFeedbackIsNullAndLogItAsync&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
