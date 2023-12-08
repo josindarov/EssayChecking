@@ -1,9 +1,12 @@
+using System;
+using System.Linq.Expressions;
 using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.Storages;
 using EssayChecker.API.Models.Foundation.Feedbacks;
 using EssayChecker.API.Services.Foundation.Feedbacks;
 using Moq;
 using Tynamix.ObjectFiller;
+using Xeptions;
 
 namespace EssayChecker.API.Unit.Test.Services.Foundation.Feedbacks;
 
@@ -26,4 +29,7 @@ public partial class FeedbackServiceTests
 
     private static Filler<Feedback> CreateFeedbackFiller() =>
         new Filler<Feedback>();
+    
+    private static Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedException) =>
+        actualException => actualException.SameExceptionAs(expectedException);
 }
