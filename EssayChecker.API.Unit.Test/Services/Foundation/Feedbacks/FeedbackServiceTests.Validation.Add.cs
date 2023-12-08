@@ -34,4 +34,58 @@ public partial class FeedbackServiceTests
         storageBrokerMock.VerifyNoOtherCalls();
         loggingBrokerMock.VerifyNoOtherCalls();
     }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("  ")]
+    public async Task ShouldThrowValidationExceptionOnAddIfFeedbackIsInvalidAndLogItAsync(
+        string invalidText)
+    {
+        // given
+        Feedback someFeedback = new Feedback()
+        {
+            Comment = invalidText
+        };
+
+        var invalidFeedbackException = new InvalidFeedbackException();
+        
+        invalidFeedbackException.AddData(
+            key:nameof(Feedback.Id),
+            values:"Id is required");
+        
+        invalidFeedbackException.AddData(
+            key: nameof(Feedback.Comment),
+            values: "Text is required");
+        
+        invalidFeedbackException.AddData(
+            key: nameof(Feedback.Mark),
+            values: "Mark is required");
+        
+        invalidFeedbackException.AddData(
+            key: nameof(Feedback.EssayId),
+            values: "Id is required");
+
+        var expectedFeedbackValidationException =
+            new FeedbackValidationException(invalidFeedbackException);
+        
+        // when
+        ValueTask<Feedback> addFeedbackTask = feedbackService.AddFeedbackAsync(someFeedback);
+
+        var actualFeedbackValidationException =
+            await Assert.ThrowsAsync<FeedbackValidationException>(addFeedbackTask.AsTask);
+        
+        // then
+        actualFeedbackValidationException.Should().BeEquivalentTo(expectedFeedbackValidationException);
+        
+        loggingBrokerMock.Verify(broker => 
+            broker.LogError(It.Is(SameExceptionAs(expectedFeedbackValidationException))),
+            Times.Once);
+        
+        storageBrokerMock.Verify(broker => 
+            broker.InsertFeedbackAsync(someFeedback),Times.Never);
+        
+        loggingBrokerMock.VerifyNoOtherCalls();
+        storageBrokerMock.VerifyNoOtherCalls();
+    }
 }
