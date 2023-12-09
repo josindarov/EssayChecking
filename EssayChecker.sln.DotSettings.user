@@ -19,10 +19,15 @@
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d708c0b9_002D8b8f_002D43bc_002D97d7_002Dee589a007cae/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from UserServiceTests.Logic.Add.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Users.UserServiceTests&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldEssayAddAsync&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Feedbacks.FeedbackServiceTests.ShouldFeedbackAddAsync&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Feedbacks.FeedbackServiceTests.ShouldThrowValidationExceptionIfFeedbackIsNullAndLogItAsync&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+  &lt;Or&gt;&#xD;
+    &lt;TestAncestor&gt;&#xD;
+      &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Users.UserServiceTests&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldEssayAddAsync&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Feedbacks.FeedbackServiceTests.ShouldFeedbackAddAsync&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Feedbacks.FeedbackServiceTests.ShouldThrowValidationExceptionIfFeedbackIsNullAndLogItAsync&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Feedbacks.FeedbackServiceTests.ShouldThrowValidationExceptionOnAddIfFeedbackIsInvalidAndLogItAsync&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Feedbacks.FeedbackServiceTests.ShouldThrowCriticalDependencyExceptionOnAddIfSqlErrorOccursAndLogItAsync&lt;/TestId&gt;&#xD;
+    &lt;/TestAncestor&gt;&#xD;
+    &lt;ProjectFile&gt;075528DE-7DE4-4301-97C9-0130862066BF/d:Services/d:Foundation/d:Feedbacks/f:FeedbackServiceTests.cs&lt;/ProjectFile&gt;&#xD;
+  &lt;/Or&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
