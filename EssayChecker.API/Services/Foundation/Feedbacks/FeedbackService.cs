@@ -29,7 +29,7 @@ public partial class FeedbackService : IFeedbackService
 
     public IQueryable<Feedback> RetrieveAllFeedbacks()
     {
-        throw new NotImplementedException();
+        return this.storageBroker.SelectAllFeedbacks();
     }
 
     public ValueTask<Feedback> RetrieveFeedbackByIdAsync(Guid id) =>
