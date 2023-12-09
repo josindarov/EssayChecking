@@ -34,6 +34,9 @@ public partial class FeedbackServiceTests
             .AsQueryable();
     }
     
+    private static string GetRandomString() =>
+        new MnemonicString(wordCount: GetRandomNumber()).GetValue();
+    
     private static int GetRandomNumber() =>
         new IntRange(min: 9, max: 99).GetValue();
     private static Feedback CreateRandomFeedback() =>

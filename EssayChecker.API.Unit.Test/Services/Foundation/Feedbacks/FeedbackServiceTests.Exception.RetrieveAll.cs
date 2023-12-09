@@ -49,4 +49,46 @@ public partial class FeedbackServiceTests
         this.storageBrokerMock.VerifyNoOtherCalls();
         this.loggingBrokerMock.VerifyNoOtherCalls();
     }
+
+    [Fact]
+    public async Task ShouldThrowServiceExceptionOnRetrieveAllIfServiceExceptionOccursAndLogItAsync()
+    {
+        //given
+        string exceptionMessage = GetRandomString();
+        var serviceException = new Exception(exceptionMessage);
+
+        var failedFeedbackServiceException =
+            new FailedFeedbackServiceException(serviceException);
+
+        var expectedFeedbackServiceException =
+            new FeedbackServiceException(failedFeedbackServiceException);
+
+        this.storageBrokerMock.Setup(broker =>
+                broker.SelectAllFeedbacks())
+            .Throws(serviceException);
+
+        //when
+        Action retrieveAllFeedbackAction = () =>
+            this.feedbackService.RetrieveAllFeedbacks();
+
+        FeedbackServiceException actualFeedbackServiceException = 
+            Assert.Throws<FeedbackServiceException>(retrieveAllFeedbackAction);
+
+        //then
+        actualFeedbackServiceException.Should().BeEquivalentTo(
+            expectedFeedbackServiceException);
+
+        this.storageBrokerMock.Verify(broker =>
+                broker.SelectAllFeedbacks(),
+            Times.Once);
+
+        this.loggingBrokerMock.Verify(broker =>
+                broker.LogError(It.Is(SameExceptionAs(
+                    expectedFeedbackServiceException))),
+            Times.Once);
+
+        this.storageBrokerMock.VerifyNoOtherCalls();
+        this.loggingBrokerMock.VerifyNoOtherCalls();
+
+    }
 }
