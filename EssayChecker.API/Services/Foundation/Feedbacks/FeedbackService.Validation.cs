@@ -1,4 +1,6 @@
 using System;
+using System.Data;
+using EssayChecker.API.Models.Foundation.Essays.Exceptions;
 using EssayChecker.API.Models.Foundation.Feedbacks;
 using EssayChecker.API.Models.Foundation.Feedbacks.Exceptions;
 
@@ -37,7 +39,19 @@ public partial class FeedbackService
         Condition = mark < 0 || mark >= 9,
         Message = "Mark is required"
     };
-    private static void Validate(params (dynamic rule, string Parameter ) [] validations)
+
+    private static void ValidateFeedbackId(Guid id) =>
+        Validate((Rule: IsValid(id), Parameter: nameof(Feedback.Id)));
+
+    private static void ValidateStorageFeedback(Feedback feedback, Guid id)
+    {
+        if (feedback is null)
+        {
+            throw new NotFoundFeedbackException(id);
+        }
+    }
+    
+    private static void Validate(params (dynamic rule, string Parameter)[] validations)
     {
         var invalidFeedbackException = new InvalidFeedbackException();
 
@@ -46,9 +60,11 @@ public partial class FeedbackService
             if (rule.Condition)
             {
                 invalidFeedbackException.UpsertDataList(
-                    key: parameter,
-                    value: rule.Message);
+                    key:parameter,
+                    value:rule.Message);
             }
         }
+        
+        invalidFeedbackException.ThrowIfContainsErrors();
     }
 }

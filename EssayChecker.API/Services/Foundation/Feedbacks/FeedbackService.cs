@@ -32,8 +32,14 @@ public partial class FeedbackService : IFeedbackService
         throw new NotImplementedException();
     }
 
-    public async ValueTask<Feedback> RetrieveFeedbackByIdAsync(Guid id)
-    {
-        return await this.storageBroker.SelectFeedbackByIdAsync(id);
-    }
+    public ValueTask<Feedback> RetrieveFeedbackByIdAsync(Guid id) =>
+        TryCatch(async () =>
+        {
+            ValidateFeedbackId(id);
+            Feedback feedback =  await this.storageBroker
+                .SelectFeedbackByIdAsync(id);
+
+            ValidateStorageFeedback(feedback, id);
+            return feedback;
+        });
 }
