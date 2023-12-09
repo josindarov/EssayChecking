@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using EssayChecker.API.Models.Foundation.Essays.Exceptions;
 using EssayChecker.API.Models.Foundation.Feedbacks;
 using EssayChecker.API.Models.Foundation.Feedbacks.Exceptions;
 using Microsoft.Data.SqlClient;
@@ -25,6 +26,10 @@ public partial class FeedbackService
         catch (InvalidFeedbackException invalidFeedbackException)
         {
             throw CreateAndLogValidationException(invalidFeedbackException);
+        }
+        catch (NotFoundFeedbackException notFoundFeedbackException)
+        {
+            throw CreateAndLogValidationException(notFoundFeedbackException);
         }
         catch (SqlException sqlException)
         {
