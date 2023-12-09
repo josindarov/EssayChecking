@@ -48,7 +48,7 @@ public partial class UserServiceTests
     }
 
     [Fact]
-    public async Task ShouldThrowNotFoundExceptionOnRetrieveByIdIfGroupIsNotFoundAndLogItAsync()
+    public async Task ShouldThrowNotFoundExceptionOnRetrieveByIdIfUserIsNotFoundAndLogItAsync()
     {
         // given
         Guid someUserId = Guid.NewGuid();
