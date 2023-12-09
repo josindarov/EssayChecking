@@ -12,8 +12,8 @@ public partial class FeedbackService
     {
         ValidateFeedbackIsNull(feedback);
         Validate((Rule: IsValid(feedback.Id), Parameter: nameof(Feedback.Id)),
-            (Rule : IsValid(feedback.Comment), Parameter: nameof(Feedback.Comment)),
-            (Rule : IsValid(feedback.Mark), Parameter: nameof(Feedback.Mark)));
+            (Rule: IsValid(feedback.Comment), Parameter: nameof(Feedback.Comment)),
+            (Rule: IsValid(feedback.EssayId), Parameter: nameof(Feedback.EssayId)));
     }
 
     private static void ValidateFeedbackIsNull(Feedback feedback)
@@ -29,17 +29,13 @@ public partial class FeedbackService
         Condition = id == Guid.Empty,
         Message = "Id is required"
     };
+    
     private static dynamic IsValid(string comment) => new
     {
         Condition = string.IsNullOrWhiteSpace(comment),
         Message = "Text is required"
     };
-    private static dynamic IsValid(float mark) => new
-    {
-        Condition = mark < 0 || mark >= 9,
-        Message = "Mark is required"
-    };
-
+    
     private static void ValidateFeedbackId(Guid id) =>
         Validate((Rule: IsValid(id), Parameter: nameof(Feedback.Id)));
 

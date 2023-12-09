@@ -35,7 +35,7 @@ public partial class FeedbackServiceTests
         loggingBrokerMock.VerifyNoOtherCalls();
     }
 
-    /*[Theory]
+    [Theory]
     [InlineData(null)]
     [InlineData("")]
     [InlineData("  ")]
@@ -55,12 +55,12 @@ public partial class FeedbackServiceTests
             values: "Id is required");
         
         invalidFeedbackException.AddData(
-            key: nameof(Feedback.Comment),
-            values: "Text is required");
+            key: nameof(Feedback.EssayId),
+            values: "Id is required");
         
         invalidFeedbackException.AddData(
-            key: nameof(Feedback.Mark),
-            values: "Mark is required");
+            key: nameof(Feedback.Comment),
+            values: "Text is required");
         
         var expectedFeedbackValidationException =
             new FeedbackValidationException(invalidFeedbackException);
@@ -83,5 +83,5 @@ public partial class FeedbackServiceTests
         
         this.loggingBrokerMock.VerifyNoOtherCalls();
         this.storageBrokerMock.VerifyNoOtherCalls();
-    }*/
+    }
 }
