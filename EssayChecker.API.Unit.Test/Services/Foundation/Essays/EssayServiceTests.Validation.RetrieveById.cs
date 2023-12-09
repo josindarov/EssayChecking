@@ -49,7 +49,7 @@ public partial class EssayServiceTests
     }
     
     [Fact]
-    public async Task ShouldThrowNotFoundExceptionOnRetrieveByIdIfGroupIsNotFoundAndLogItAsync()
+    public async Task ShouldThrowNotFoundExceptionOnRetrieveByIdIfEssayIsNotFoundAndLogItAsync()
     {
         // given
         Guid someEssayId = Guid.NewGuid();

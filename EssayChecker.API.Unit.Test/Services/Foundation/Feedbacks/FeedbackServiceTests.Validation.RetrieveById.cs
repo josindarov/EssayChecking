@@ -1,5 +1,7 @@
 using System;
 using System.Threading.Tasks;
+using EssayChecker.API.Models.Foundation.Essays;
+using EssayChecker.API.Models.Foundation.Essays.Exceptions;
 using EssayChecker.API.Models.Foundation.Feedbacks;
 using EssayChecker.API.Models.Foundation.Feedbacks.Exceptions;
 using FluentAssertions;
@@ -45,6 +47,40 @@ public partial class FeedbackServiceTests
 
         this.loggingBrokerMock.VerifyNoOtherCalls();
         this.storageBrokerMock.VerifyNoOtherCalls();
+    }
 
+    [Fact]
+    public async Task ShouldThrowNotFoundExceptionOnRetrieveByIdIfFeedbackIsNotFoundAndLogItAsync()
+    {
+        // given
+        Guid someFeedbackId = Guid.NewGuid();
+        Feedback noFeedback = null;
+        var notFoundFeedbackException = new NotFoundFeedbackException(someFeedbackId);
+
+        var expectedFeedbackValidationException = 
+            new FeedbackValidationException(notFoundFeedbackException);
+
+        this.storageBrokerMock.Setup(broker => 
+            broker.SelectFeedbackByIdAsync(It.IsAny<Guid>()))
+            .ReturnsAsync(noFeedback);
+        
+        // when
+        ValueTask<Feedback> retrieveFeedbackByIdTask = this.feedbackService.RetrieveFeedbackByIdAsync(someFeedbackId);
+
+        FeedbackValidationException actualFeedbackValidationException =
+            await Assert.ThrowsAsync<FeedbackValidationException>(retrieveFeedbackByIdTask.AsTask);
+
+        // then
+        actualFeedbackValidationException.Should().BeEquivalentTo(expectedFeedbackValidationException);
+        
+        this.storageBrokerMock.Verify(broker => 
+            broker.SelectFeedbackByIdAsync(It.IsAny<Guid>()),Times.Once);
+        
+        this.loggingBrokerMock.Verify(broker => 
+                broker.LogError(It.Is(SameExceptionAs(expectedFeedbackValidationException))),
+            Times.Once);
+        
+        this.storageBrokerMock.VerifyNoOtherCalls();
+        this.loggingBrokerMock.VerifyNoOtherCalls();
     }
 }
