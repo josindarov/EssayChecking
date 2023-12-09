@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using EssayChecker.API.Models.Foundation.Essays.Exceptions;
 using EssayChecker.API.Models.Foundation.Feedbacks;
@@ -12,6 +13,8 @@ namespace EssayChecker.API.Services.Foundation.Feedbacks;
 public partial class FeedbackService
 {
     private delegate ValueTask<Feedback> ReturningFeedbackFunction();
+
+    private delegate IQueryable<Feedback> ReturningAllFeedbacksFundtion();
 
     private async ValueTask<Feedback> TryCatch(ReturningFeedbackFunction returningFeedbackFunction)
     {
@@ -44,6 +47,21 @@ public partial class FeedbackService
                 new FailedFeedbackServiceException(exception);
 
             throw CreateAndLogServiceException(failedFeedbackServiceException);
+        }
+    }
+
+    private IQueryable<Feedback> TryCatch(ReturningAllFeedbacksFundtion returningAllFeedbacksFundtion)
+    {
+        try
+        {
+            return returningAllFeedbacksFundtion();
+        }
+        catch (SqlException sqlException)
+        {
+            var failedFeedbackStorageException =
+                new FailedFeedbackStorageException(sqlException);
+
+            throw CreateAndLogCriticalDependencyException(failedFeedbackStorageException);
         }
     }
 
