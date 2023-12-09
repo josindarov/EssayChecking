@@ -27,11 +27,9 @@ public partial class FeedbackService : IFeedbackService
             return await storageBroker.InsertFeedbackAsync(feedback);
         });
 
-    public IQueryable<Feedback> RetrieveAllFeedbacks()
-    {
-        return this.storageBroker.SelectAllFeedbacks();
-    }
-
+    public IQueryable<Feedback> RetrieveAllFeedbacks() =>
+        TryCatch(() => this.storageBroker.SelectAllFeedbacks());
+        
     public ValueTask<Feedback> RetrieveFeedbackByIdAsync(Guid id) =>
         TryCatch(async () =>
         {

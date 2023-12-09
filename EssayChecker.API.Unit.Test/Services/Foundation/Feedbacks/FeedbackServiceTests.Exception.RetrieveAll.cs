@@ -23,26 +23,30 @@ public partial class FeedbackServiceTests
             new FeedbackDependencyException(failedFeedbackStorageException);
 
         this.storageBrokerMock.Setup(broker =>
-            broker.SelectAllFeedbacks()).Throws(sqlException);
-        
+                broker.SelectAllFeedbacks())
+            .Throws(sqlException);
+
         // when
-        Action retrieveAllFeedbacks = () => 
+        Action retrieveAllFeedbacksAction = () =>
             this.feedbackService.RetrieveAllFeedbacks();
 
-        FeedbackDependencyException actualFeedbackDependencyException =
-             Assert.Throws<FeedbackDependencyException>(retrieveAllFeedbacks);
-        
+        FeedbackDependencyException actualFeedbackDependencyException = 
+            Assert.Throws<FeedbackDependencyException>(retrieveAllFeedbacksAction);
+
         // then
-        actualFeedbackDependencyException.Should().BeEquivalentTo(expectedFeedbackDependencyException);
-        
-        this.loggingBrokerMock.Verify(broker =>
-            broker.LogCritical(It.Is(SameExceptionAs(expectedFeedbackDependencyException))),
-            Times.Once);
-        
+        actualFeedbackDependencyException.Should().BeEquivalentTo(
+            expectedFeedbackDependencyException);
+
         this.storageBrokerMock.Verify(broker =>
-            broker.SelectAllEssays(),Times.Once);
-        
-        this.loggingBrokerMock.VerifyNoOtherCalls();
+                broker.SelectAllFeedbacks(),
+            Times.Once);
+
+        this.loggingBrokerMock.Verify(broker =>
+                broker.LogCritical(It.Is(SameExceptionAs(
+                    expectedFeedbackDependencyException))),
+            Times.Once);
+
         this.storageBrokerMock.VerifyNoOtherCalls();
+        this.loggingBrokerMock.VerifyNoOtherCalls();
     }
 }
