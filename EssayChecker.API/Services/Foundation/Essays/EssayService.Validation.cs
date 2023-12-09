@@ -27,9 +27,9 @@ public partial class EssayService
         Message = "Id is required"
     };
     
-    private static dynamic IsInvalid(string name) => new
+    private static dynamic IsInvalid(string content) => new
     {
-        Condition = string.IsNullOrWhiteSpace(name),
+        Condition = string.IsNullOrWhiteSpace(content),
         Message = "Text is required"
     };
     

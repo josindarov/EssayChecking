@@ -1,9 +1,11 @@
 using System;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
 using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.Storages;
 using EssayChecker.API.Models.Foundation.Feedbacks;
 using EssayChecker.API.Services.Foundation.Feedbacks;
+using Microsoft.Data.SqlClient;
 using Moq;
 using Tynamix.ObjectFiller;
 using Xeptions;
@@ -32,4 +34,7 @@ public partial class FeedbackServiceTests
     
     private static Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedException) =>
         actualException => actualException.SameExceptionAs(expectedException);
+    
+    private static SqlException GetSqlException() =>
+        (SqlException)FormatterServices.GetUninitializedObject(typeof(SqlException));
 }

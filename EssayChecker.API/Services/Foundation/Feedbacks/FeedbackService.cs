@@ -8,7 +8,7 @@ using EssayChecker.API.Models.Foundation.Feedbacks.Exceptions;
 
 namespace EssayChecker.API.Services.Foundation.Feedbacks;
 
-public class FeedbackService : IFeedbackService
+public partial class FeedbackService : IFeedbackService
 {
     private readonly IStorageBroker storageBroker;
     private readonly ILoggingBroker loggingBroker;
@@ -19,21 +19,13 @@ public class FeedbackService : IFeedbackService
         this.storageBroker = storageBroker;
         this.loggingBroker = loggingBroker;
     }
-    public async ValueTask<Feedback> AddFeedbackAsync(Feedback feedback)
-    {
-        try
+
+    public ValueTask<Feedback> AddFeedbackAsync(Feedback feedback) =>
+        TryCatch(async () =>
         {
-            if (feedback is null)
-            {
-                throw new FeedbackNullException();
-            }
+            ValidateFeedbackOnAdd(feedback);
             return await storageBroker.InsertFeedbackAsync(feedback);
-        }
-        catch (FeedbackNullException feedbackNullException)
-        {
-            throw new FeedbackValidationException(feedbackNullException);
-        }
-    }
+        });
 
     public IQueryable<Feedback> RetrieveAllFeedbacks()
     {

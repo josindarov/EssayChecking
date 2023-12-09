@@ -42,8 +42,8 @@ public partial class FeedbackServiceTests
     public async Task ShouldThrowValidationExceptionOnAddIfFeedbackIsInvalidAndLogItAsync(
         string invalidText)
     {
-        // given
-        Feedback someFeedback = new Feedback()
+        // given 
+        Feedback invalidFeedback = new Feedback()
         {
             Comment = invalidText
         };
@@ -51,8 +51,8 @@ public partial class FeedbackServiceTests
         var invalidFeedbackException = new InvalidFeedbackException();
         
         invalidFeedbackException.AddData(
-            key:nameof(Feedback.Id),
-            values:"Id is required");
+            key: nameof(Feedback.Id),
+            values: "Id is required");
         
         invalidFeedbackException.AddData(
             key: nameof(Feedback.Comment),
@@ -62,30 +62,26 @@ public partial class FeedbackServiceTests
             key: nameof(Feedback.Mark),
             values: "Mark is required");
         
-        invalidFeedbackException.AddData(
-            key: nameof(Feedback.EssayId),
-            values: "Id is required");
-
         var expectedFeedbackValidationException =
             new FeedbackValidationException(invalidFeedbackException);
         
         // when
-        ValueTask<Feedback> addFeedbackTask = feedbackService.AddFeedbackAsync(someFeedback);
+        ValueTask<Feedback> addFeedbackTask = this.feedbackService.AddFeedbackAsync(invalidFeedback);
 
         var actualFeedbackValidationException =
             await Assert.ThrowsAsync<FeedbackValidationException>(addFeedbackTask.AsTask);
-        
+
         // then
         actualFeedbackValidationException.Should().BeEquivalentTo(expectedFeedbackValidationException);
         
-        loggingBrokerMock.Verify(broker => 
+        this.loggingBrokerMock.Verify(broker => 
             broker.LogError(It.Is(SameExceptionAs(expectedFeedbackValidationException))),
             Times.Once);
         
-        storageBrokerMock.Verify(broker => 
-            broker.InsertFeedbackAsync(someFeedback),Times.Never);
+        this.storageBrokerMock.Verify(broker => 
+            broker.InsertFeedbackAsync(invalidFeedback),Times.Never);
         
-        loggingBrokerMock.VerifyNoOtherCalls();
-        storageBrokerMock.VerifyNoOtherCalls();
+        this.loggingBrokerMock.VerifyNoOtherCalls();
+        this.storageBrokerMock.VerifyNoOtherCalls();
     }
 }
