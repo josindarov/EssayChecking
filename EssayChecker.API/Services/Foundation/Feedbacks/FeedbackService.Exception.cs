@@ -63,6 +63,13 @@ public partial class FeedbackService
 
             throw CreateAndLogCriticalDependencyException(failedFeedbackStorageException);
         }
+        catch (Exception exception)
+        {
+            var failedFeedbackServiceException =
+                new FailedFeedbackServiceException(exception);
+
+            throw CreateAndLogServiceException(failedFeedbackServiceException);
+        }
     }
 
     private Exception CreateAndLogServiceException(Exception exception)
