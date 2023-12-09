@@ -27,12 +27,12 @@ public partial class FeedbackServiceTests
         // then
         actualFeedbackValidationException.Should().BeEquivalentTo(expectedFeedbackValidationException);
         
-        loggingBrokerMock.Verify(broker => 
+        this.loggingBrokerMock.Verify(broker => 
             broker.LogError(It.Is(SameExceptionAs(expectedFeedbackValidationException))),
-            Times.Never);
+            Times.Once);
         
-        storageBrokerMock.VerifyNoOtherCalls();
-        loggingBrokerMock.VerifyNoOtherCalls();
+        this.storageBrokerMock.VerifyNoOtherCalls();
+        this.loggingBrokerMock.VerifyNoOtherCalls();
     }
 
     [Theory]
