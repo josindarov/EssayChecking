@@ -1,6 +1,7 @@
 using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.Storages;
 using EssayChecker.API.Services.Foundation.Essays;
+using EssayChecker.API.Services.Foundation.Feedbacks;
 using EssayChecker.API.Services.Foundation.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -68,6 +69,7 @@ namespace EssayChecker.API
         {
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IEssayService, EssayService>();
+            services.AddTransient<IFeedbackService, FeedbackService>();
         }
     }
 }
