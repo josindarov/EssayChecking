@@ -33,6 +33,22 @@ public partial class FeedbackService
 
             throw CreateAndLogCriticalDependencyException(failedFeedbackStorageException);
         }
+        catch (Exception exception)
+        {
+            var failedFeedbackServiceException =
+                new FailedFeedbackServiceException(exception);
+
+            throw CreateAndLogServiceException(failedFeedbackServiceException);
+        }
+    }
+
+    private Exception CreateAndLogServiceException(Exception exception)
+    {
+        var feedbackServiceException = 
+            new FeedbackServiceException(exception);
+
+        this.loggingBroker.LogError(feedbackServiceException);
+        return feedbackServiceException;
     }
 
     private FeedbackDependencyException CreateAndLogCriticalDependencyException(Exception exception)

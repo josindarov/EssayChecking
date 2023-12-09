@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using EssayChecker.API.Models.Foundation.Feedbacks;
 using EssayChecker.API.Models.Foundation.Feedbacks.Exceptions;
@@ -38,6 +39,43 @@ public partial class FeedbackServiceTests
         this.loggingBrokerMock.Verify(broker =>
             broker.LogCritical(It.Is(SameExceptionAs(
                 expectedFeedbackDependencyException))),Times.Once);
+        
+        this.storageBrokerMock.Verify(broker => 
+            broker.InsertFeedbackAsync(randomFeedback),Times.Once);
+        
+        this.loggingBrokerMock.VerifyNoOtherCalls();
+        this.storageBrokerMock.VerifyNoOtherCalls();
+    }
+
+    [Fact]
+    public async Task ShouldThrowServiceExceptionOnAddIfServiceErrorOccursAndLogItAsync()
+    {
+        // given
+        Feedback randomFeedback = CreateRandomFeedback();
+        Exception serviceException = new Exception();
+
+        var failedFeedbackServiceException =
+            new FailedFeedbackServiceException(serviceException);
+
+        var expectedFeedbackServiceException =
+            new FeedbackServiceException(failedFeedbackServiceException);
+
+        this.storageBrokerMock.Setup(broker => 
+                broker.InsertFeedbackAsync(randomFeedback))
+            .ThrowsAsync(serviceException);
+        
+        // when
+        ValueTask<Feedback> addFeedbackTask = this.feedbackService.AddFeedbackAsync(randomFeedback);
+
+        FeedbackServiceException actuaFeedbackServiceException =
+            await Assert.ThrowsAsync<FeedbackServiceException>(addFeedbackTask.AsTask);
+        
+        // then
+        actuaFeedbackServiceException.Should().BeEquivalentTo(expectedFeedbackServiceException);
+        
+        this.loggingBrokerMock.Verify(broker =>
+            broker.LogError(It.Is(SameExceptionAs(expectedFeedbackServiceException))),
+            Times.Once);
         
         this.storageBrokerMock.Verify(broker => 
             broker.InsertFeedbackAsync(randomFeedback),Times.Once);
