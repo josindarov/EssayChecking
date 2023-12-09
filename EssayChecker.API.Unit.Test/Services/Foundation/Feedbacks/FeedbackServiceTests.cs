@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using EssayChecker.API.Brokers.Loggings;
@@ -26,6 +27,15 @@ public partial class FeedbackServiceTests
             loggingBroker: loggingBrokerMock.Object);
     }
 
+    private static IQueryable<Feedback> CreateRandomEssays()
+    {
+        return CreateFeedbackFiller()
+            .Create(count: GetRandomNumber())
+            .AsQueryable();
+    }
+    
+    private static int GetRandomNumber() =>
+        new IntRange(min: 9, max: 99).GetValue();
     private static Feedback CreateRandomFeedback() =>
         CreateFeedbackFiller().Create();
 

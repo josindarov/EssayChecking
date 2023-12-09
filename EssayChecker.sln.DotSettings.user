@@ -33,6 +33,7 @@
       &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Feedbacks.FeedbackServiceTests.ShouldThrowNotFoundExceptionOnRetrieveByIdIfFeedbackIsNotFoundAndLogItAsync&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Feedbacks.FeedbackServiceTests.ShouldThrowCriticalDependencyExceptionOnRetrieveByIdIfSqlErrorOccursAndLogItAsync&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Feedbacks.FeedbackServiceTests.ShouldThrowServiceExceptionOnRetrieveByIdIfServiceExceptionOccursAndLogItAsync&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Feedbacks.FeedbackServiceTests.ShouldRetrieveAllFeedbacks&lt;/TestId&gt;&#xD;
     &lt;/TestAncestor&gt;&#xD;
     &lt;ProjectFile&gt;075528DE-7DE4-4301-97C9-0130862066BF/d:Services/d:Foundation/d:Feedbacks/f:FeedbackServiceTests.cs&lt;/ProjectFile&gt;&#xD;
   &lt;/Or&gt;&#xD;
