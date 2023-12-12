@@ -5,18 +5,7 @@
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b9b67f31_002D0bad_002D4cdb_002D9229_002D8b6736b338bf/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ShouldThrowValidationExceptionOnAddIfUserIsNullAndLogItAsync" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
-  &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldThrowValidationExceptionOnAddIfEssayIsInvalidAndLogItAsync&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldThrowCriticalDependencyExceptionOnAddIfSqlErrorOccursAndLogItAsync&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldThrowServiceExceptionOnAddIfServiceErrorOccuredAndLogIdAsync&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldEssayRetrieveById&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldThrowValidationExceptionOnRetrieveByIdIfIdIsInvalidAndLogItAsync&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldThrowNotFoundExceptionOnRetrieveByIdIfGroupIsNotFoundAndLogItAsync&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldThrowCriticalDependencyExceptionOnRetrieveByIdIfSqlErrorOccursAndLogItAsync&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldThrowServiceExceptionOnRetrieveByIdIfServiceErrorOccursAndLogItAsync&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldRetrieveAllEssays&lt;/TestId&gt;&#xD;
-    &lt;TestId&gt;xUnit::075528DE-7DE4-4301-97C9-0130862066BF::net6.0::EssayChecker.API.Unit.Test.Services.Foundation.Essays.EssayServiceTests.ShouldThrowCriticalDependencyExceptionOnRetrieveAllIfSqlErrorOccursAndLogIt&lt;/TestId&gt;&#xD;
-  &lt;/TestAncestor&gt;&#xD;
+  &lt;Project Location="C:\Users\99899\Desktop\personal project\EssayChecking\EssayChecker.API.Unit.Test" Presentation="&amp;lt;EssayChecker.API.Unit.Test&amp;gt;" /&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=d708c0b9_002D8b8f_002D43bc_002D97d7_002Dee589a007cae/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from UserServiceTests.Logic.Add.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;ProjectFolder&gt;075528DE-7DE4-4301-97C9-0130862066BF/d:Services/d:Foundation&lt;/ProjectFolder&gt;&#xD;

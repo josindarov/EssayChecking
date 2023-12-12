@@ -1,4 +1,5 @@
 using EssayChecker.API.Brokers.Loggings;
+using EssayChecker.API.Brokers.OpenAI;
 using EssayChecker.API.Brokers.Storages;
 using EssayChecker.API.Services.Foundation.Essays;
 using EssayChecker.API.Services.Foundation.Feedbacks;
@@ -63,6 +64,7 @@ namespace EssayChecker.API
         {
             services.AddTransient<IStorageBroker, StorageBroker>();
             services.AddTransient<ILoggingBroker, LoggingBroker>();
+            services.AddTransient<IOpenAIBroker, OpenAIBroker>();
         }
 
         private static void AddServices(IServiceCollection services)
