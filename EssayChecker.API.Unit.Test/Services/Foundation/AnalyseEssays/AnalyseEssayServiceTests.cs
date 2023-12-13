@@ -1,11 +1,13 @@
 using System;
 using System.Linq;
+using System.Linq.Expressions;
 using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.OpenAIs;
 using EssayChecker.API.Services.Foundation.AnalyseEssays;
 using Moq;
 using Standard.AI.OpenAI.Models.Services.Foundations.ChatCompletions;
 using Tynamix.ObjectFiller;
+using Xeptions;
 
 namespace EssayChecker.API.Unit.Test.Services.Foundation.AnalyseEssays;
 
@@ -46,4 +48,7 @@ public partial class AnalyseEssayServiceTests
 
         return filler;
     }
+    
+    private static Expression<Func<Xeption, bool>> SameExceptionAs(Xeption expectedException) =>
+        actualException => actualException.SameExceptionAs(expectedException);
 }
