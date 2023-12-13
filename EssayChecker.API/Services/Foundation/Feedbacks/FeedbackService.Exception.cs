@@ -14,7 +14,7 @@ public partial class FeedbackService
 {
     private delegate ValueTask<Feedback> ReturningFeedbackFunction();
 
-    private delegate IQueryable<Feedback> ReturningAllFeedbacksFundtion();
+    private delegate IQueryable<Feedback> ReturningAllFeedbacksFunction();
 
     private async ValueTask<Feedback> TryCatch(ReturningFeedbackFunction returningFeedbackFunction)
     {
@@ -50,7 +50,7 @@ public partial class FeedbackService
         }
     }
 
-    private IQueryable<Feedback> TryCatch(ReturningAllFeedbacksFundtion returningAllFeedbacksFundtion)
+    private IQueryable<Feedback> TryCatch(ReturningAllFeedbacksFunction returningAllFeedbacksFundtion)
     {
         try
         {
