@@ -1,7 +1,7 @@
 using System;
 using Xeptions;
 
-namespace EssayChecker.API.Models.Foundation.Essays.Exceptions;
+namespace EssayChecker.API.Models.Foundation.Feedbacks.Exceptions;
 
 public class NotFoundFeedbackException : Xeption
 {
