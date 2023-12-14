@@ -18,6 +18,22 @@ public partial class AnalyseEssayService
         {
             throw CreateAndLogValidationException(nullAnalyseEssayException);
         }
+        catch (Exception exception)
+        {
+            var failedAnalyseEssayServiceException =
+                new FailedAnalyseEssayServiceException(exception);
+
+            throw CreateAndLogServiceException(failedAnalyseEssayServiceException);
+        }
+    }
+
+    private Exception CreateAndLogServiceException(Exception exception)
+    {
+        var analyseEssayServiceException = 
+            new AnalyseEssayServiceException(exception);
+        
+        this.loggingBroker.LogError(analyseEssayServiceException);
+        return analyseEssayServiceException;
     }
 
     private AnalyseEssayValidationException CreateAndLogValidationException(Exception exception)
