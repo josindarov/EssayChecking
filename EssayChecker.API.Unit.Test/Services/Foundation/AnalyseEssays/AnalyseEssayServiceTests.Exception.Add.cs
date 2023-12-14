@@ -17,9 +17,11 @@ public partial class AnalyseEssayServiceTests
         // given
         string randomText = GetRandomString();
         Exception serviceException = new Exception();
+        var failedAnalyseEssayServiceException =
+            new FailedAnalyseEssayServiceException(serviceException);
         
         var expectedAnalyseEssayServiceException =
-            new AnalyseEssayServiceException(serviceException);
+            new AnalyseEssayServiceException(failedAnalyseEssayServiceException);
 
         this.openAiBrokerMock.Setup(broker =>
             broker.AnalyseEssayAsync(It.IsAny<ChatCompletion>()))
