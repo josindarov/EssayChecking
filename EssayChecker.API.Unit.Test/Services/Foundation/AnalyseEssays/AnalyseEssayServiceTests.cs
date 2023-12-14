@@ -1,9 +1,11 @@
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
 using EssayChecker.API.Brokers.Loggings;
 using EssayChecker.API.Brokers.OpenAIs;
 using EssayChecker.API.Services.Foundation.AnalyseEssays;
+using Microsoft.Data.SqlClient;
 using Moq;
 using Standard.AI.OpenAI.Models.Services.Foundations.ChatCompletions;
 using Tynamix.ObjectFiller;
